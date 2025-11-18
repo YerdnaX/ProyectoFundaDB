@@ -1,0 +1,133 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="IconosMenu\AsignacionTareas.png" />
+    <None Remove="IconosMenu\Cultivo.png" />
+    <None Remove="IconosMenu\Culti_Vehi_Masco.png" />
+    <None Remove="IconosMenu\Eventos.png" />
+    <None Remove="IconosMenu\Facturas.png" />
+    <None Remove="IconosMenu\InformacionGeneral.png" />
+    <None Remove="IconosMenu\ListasYTareas.png" />
+    <None Remove="IconosMenu\Mascotas.png" />
+    <None Remove="IconosMenu\Moviminetos.png" />
+    <None Remove="IconosMenu\Presupuesto.png" />
+    <None Remove="IconosMenu\Salarios.png" />
+    <None Remove="IconosMenu\Vehiculo.png" />
+    <None Remove="Imagenes\anadir.png" />
+    <None Remove="Imagenes\borrar.png" />
+    <None Remove="Imagenes\conejo.jfif" />
+    <None Remove="Imagenes\editar.png" />
+    <None Remove="Imagenes\elefante.jfif" />
+    <None Remove="Imagenes\gallina.jfif" />
+    <None Remove="Imagenes\pinguino.jfif" />
+    <None Remove="Imagenes\tiburon.jfif" />
+    <None Remove="Imagenes\zorro.jfif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="IconosMenu\AsignacionTareas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Cultivo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Culti_Vehi_Masco.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Eventos.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Facturas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\InformacionGeneral.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\ListasYTareas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Mascotas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Moviminetos.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Presupuesto.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Salarios.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Vehiculo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\anadir.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\borrar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\conejo.jfif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\editar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\elefante.jfif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\gallina.jfif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\pinguino.jfif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\tiburon.jfif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\zorro.jfif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BaseDeDatos\BaseDeDatos.csproj" />
+    <ProjectReference Include="..\Clases\Clases.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MenuPrincipal.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Vehiculo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Mascotas.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Cultivos.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Culti_Masco_Vehi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Movimientos.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Salarios.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presupuesto.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

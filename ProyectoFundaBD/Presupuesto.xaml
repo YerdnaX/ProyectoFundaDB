@@ -1,0 +1,161 @@
+﻿<Window x:Class="ProyectoFundaBD.Presupuesto"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProyectoFundaBD"
+        mc:Ignorable="d"
+        Title="Finanzas" Height="550" Width="800"
+        Closing="Window_Closing"
+        ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0003F1" Offset="0.413"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Content="Presupuesto" HorizontalAlignment="Left" VerticalAlignment="Top" Width="333" FontFamily="Cooper Black" FontSize="48" FontWeight="Bold" Foreground="White" Height="68" Margin="263,0,0,0"/>
+        <Label Content="Año:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="97,85,0,0"/>
+        <Label Content="Mes:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="97,130,0,0"/>
+        <Label Content="Categoria:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="97,175,0,0"/>
+        <Label Content="Monto planeado:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="419,153,0,0"/>
+        <Label Content="Monto ejecutado:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="213" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="415,113,0,0"/>
+        <ComboBox x:Name="boxcategoria" 
+          HorizontalAlignment="Left" 
+          Margin="220,179,0,0" 
+          VerticalAlignment="Top" 
+          Width="143" 
+          FontFamily="Arial Narrow" 
+          FontSize="18"  
+          ItemsSource="{Binding Categorias_Finanzas}"
+          DisplayMemberPath="Nombre_categoria"
+          SelectedValuePath="ID_categoria" Height="27">
+        </ComboBox>
+        <DataGrid x:Name="dbpresupuesto" AutoGenerateColumns="False" Margin="66,303,66,35"
+          IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+          CanUserReorderColumns="False" CanUserResizeColumns="True"
+          CanUserResizeRows="False" CanUserSortColumns="True"
+          SelectionMode="Single" SelectionUnit="FullRow"
+          Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
+          RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
+          FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
+          GridLinesVisibility="None" RowHeight="35">
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#FF0003F1"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="8,5"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="AÑO" Binding="{Binding Año}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="MES" Binding="{Binding Mes}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="CATEGORIA" Binding="{Binding Categoria}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="MONTO PLANEADO" Binding="{Binding Monto_Planeado}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="MONTO EJECUTADO" Binding="{Binding Monto_Ejecutado}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="txtyears" HorizontalAlignment="Left" Margin="220,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <ComboBox x:Name="boxmeses" HorizontalAlignment="Left" Margin="220,135,0,0" VerticalAlignment="Top" Width="143" Height="27">
+            <ComboBoxItem Content="ENERO"/>
+            <ComboBoxItem Content="FEBRERO"/>
+            <ComboBoxItem Content="MARZO"/>
+            <ComboBoxItem Content="ABRIL"/>
+            <ComboBoxItem Content="MAYO"/>
+            <ComboBoxItem Content="JUNIO"/>
+            <ComboBoxItem Content="JULIO"/>
+            <ComboBoxItem Content="AGOSTO"/>
+            <ComboBoxItem Content="SEPTIEMBRE"/>
+            <ComboBoxItem Content="OCTUBRE"/>
+            <ComboBoxItem Content="NOVIEMBRE"/>
+            <ComboBoxItem Content="DICIEMBRE"/>
+        </ComboBox>
+        <TextBox x:Name="txtmontoplaneado" HorizontalAlignment="Left" Margin="602,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtmontoejecutado" HorizontalAlignment="Left" Margin="602,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="97,227,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="176">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                <TextBlock Text="Agregar Presupuesto" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="314,227,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="196">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                <TextBlock Text="Modificar Presupuesto" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btneliminar" HorizontalAlignment="Left" Margin="557,227,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="165">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                <TextBlock Text="Eliminar Presupuesto" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

@@ -103,7 +103,7 @@ namespace ProyectoFundaBD
 
                     dbares.ItemsSource = bd.TablaAreas.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     dbares.Items.Refresh();
                 }
                 else
@@ -269,7 +269,7 @@ namespace ProyectoFundaBD
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Mostrar el menú principal
+            // Mostrar el menu principal
             MenuPrincipal menuPrincipal = new MenuPrincipal(miembroActual);
             menuPrincipal.Show();
 

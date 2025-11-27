@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoFundaBD"
         mc:Ignorable="d"
-        Title="Eventros" Height="650" Width="800"
+        Title="Eventros" Height="650" Width="1300"
         Closing="Window_Closing"
         ResizeMode="CanMinimize">
     <Grid>
@@ -15,14 +15,14 @@
                 <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Label Content="Eventos" HorizontalAlignment="Left" Margin="302,10,0,0" VerticalAlignment="Top" Width="212" FontFamily="Cooper Black" FontSize="48" FontWeight="Bold" Foreground="White" Height="65"/>
-        <Label Content="Tipo:" HorizontalAlignment="Left" Margin="138,95,0,0" VerticalAlignment="Top" Width="75" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
-        <Label Content="Titulo:" HorizontalAlignment="Left" Margin="138,159,0,0" VerticalAlignment="Top" Width="86" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
-        <Label Content="Fecha:" HorizontalAlignment="Left" Margin="138,214,0,0" VerticalAlignment="Top" Width="75" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
-        <Label Content="Lugar:" HorizontalAlignment="Left" Margin="476,95,0,0" VerticalAlignment="Top" Width="75" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
-        <Label Content="Notas:" HorizontalAlignment="Left" Margin="476,159,0,0" VerticalAlignment="Top" Width="75" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
-        <Label Content="Miembro:" HorizontalAlignment="Left" Margin="476,214,0,0" VerticalAlignment="Top" Width="106" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
-        <ComboBox x:Name="boxtipo" HorizontalAlignment="Left" Margin="224,104,0,0" VerticalAlignment="Top" Width="120">
+        <Label Content="Eventos" HorizontalAlignment="Left" Margin="190,78,0,0" VerticalAlignment="Top" Width="212" FontFamily="Cooper Black" FontSize="48" FontWeight="Bold" Foreground="White" Height="65"/>
+        <Label Content="Tipo:" HorizontalAlignment="Left" Margin="20,178,0,0" VerticalAlignment="Top" Width="75" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
+        <Label Content="Titulo:" HorizontalAlignment="Left" Margin="20,242,0,0" VerticalAlignment="Top" Width="86" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
+        <Label Content="Fecha:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Width="75" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
+        <Label Content="Lugar:" HorizontalAlignment="Left" Margin="317,178,0,0" VerticalAlignment="Top" Width="75" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
+        <Label Content="Notas:" HorizontalAlignment="Left" Margin="317,242,0,0" VerticalAlignment="Top" Width="75" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
+        <Label Content="Miembro:" HorizontalAlignment="Left" Margin="307,0,0,0" VerticalAlignment="Center" Width="106" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="41"/>
+        <ComboBox x:Name="boxtipo" HorizontalAlignment="Left" Margin="118,188,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="CITA MEDICA"/>
             <ComboBoxItem Content="CUMPLE"/>
             <ComboBoxItem Content="ANIVERSARIO"/>
@@ -31,20 +31,20 @@
         </ComboBox>
         <ComboBox x:Name="boxmiembro" 
             HorizontalAlignment="Left" 
-            Margin="587,214,0,0" 
+            Margin="418,304,0,0" 
             VerticalAlignment="Top" 
-            Width="143" 
+            Width="118" 
             FontFamily="Arial Narrow" 
             FontSize="18"  
             ItemsSource="{Binding Miembros}"
             DisplayMemberPath="Nombre"
-            SelectedValuePath="ID_Miembros" Height="27">
+            SelectedValuePath="ID_Miembros" Height="23">
         </ComboBox>
-        <TextBox x:Name="txttitulo" HorizontalAlignment="Left" Margin="224,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtlugar" HorizontalAlignment="Left" Margin="563,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtnotas" HorizontalAlignment="Left" Margin="563,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <DatePicker x:Name="fecha" HorizontalAlignment="Left" Margin="224,222,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="tablaeventos" AutoGenerateColumns="False" Margin="114,357,70,30"
+        <TextBox x:Name="txttitulo" HorizontalAlignment="Left" Margin="118,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtlugar" HorizontalAlignment="Left" Margin="416,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtnotas" HorizontalAlignment="Left" Margin="416,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="fecha" HorizontalAlignment="Left" Margin="118,0,0,0" VerticalAlignment="Center"/>
+        <DataGrid x:Name="tablaeventos" AutoGenerateColumns="False" Margin="617,87,111,326"
           IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
@@ -144,23 +144,115 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="138,288,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="140">
+        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="119,403,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="140">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Eventos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="342,288,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="160">
+        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="304,403,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="160">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Eventos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnborrar" HorizontalAlignment="Left" Margin="544,288,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="158" Click="btnborrar_Click">
+        <Button x:Name="btnborrar" HorizontalAlignment="Left" Margin="202,478,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="158" Click="btnborrar_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Eventos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
+        <DataGrid x:Name="tablavistaeventos" AutoGenerateColumns="False" Margin="617,380,111,33"
+    IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+    CanUserReorderColumns="False" CanUserResizeColumns="True"
+    CanUserResizeRows="False" CanUserSortColumns="True"
+    SelectionMode="Single" SelectionUnit="FullRow"
+    Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
+    RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
+    FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
+    GridLinesVisibility="None" RowHeight="35">
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#FF0003F1"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="8,5"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="TÍTULO" Binding="{Binding titulo}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="TIPO" Binding="{Binding tipo}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="FECHA Y HORA" Binding="{Binding fecha_hora}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="LUGAR" Binding="{Binding lugar}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="RESPONSABLE" Binding="{Binding responsable}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="EVENTOS DE ESTE MES" HorizontalAlignment="Left" Margin="748,332,0,0" VerticalAlignment="Top" Width="310" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White" Height="43" IsEnabled="False"/>
+        <Label Content="TODOS LOS EVENTOS" HorizontalAlignment="Left" Margin="748,39,0,0" VerticalAlignment="Top" Width="310" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White" Height="43" IsEnabled="False"/>
     </Grid>
 </Window>

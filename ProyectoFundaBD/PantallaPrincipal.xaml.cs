@@ -387,7 +387,7 @@ namespace ProyectoFundaBD
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Cerrar la aplicación completamente
+            // Cerrar la aplicacion completamente
             Application.Current.Shutdown();
         }
     }

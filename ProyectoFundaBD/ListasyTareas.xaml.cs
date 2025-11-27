@@ -121,7 +121,7 @@ namespace ProyectoFundaBD
 
                     dblistas.ItemsSource = bd.TablaListas.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     dblistas.Items.Refresh();
                 }
                 else
@@ -150,7 +150,7 @@ namespace ProyectoFundaBD
 
                     dbtareas.ItemsSource = bd.TablaTareas.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     dbtareas.Items.Refresh();
                 }
                 else
@@ -165,7 +165,7 @@ namespace ProyectoFundaBD
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Mostrar el menú principal
+            // Mostrar el menu principal
             MenuPrincipal menuPrincipal = new MenuPrincipal(miembroActual);
             menuPrincipal.Show();
 

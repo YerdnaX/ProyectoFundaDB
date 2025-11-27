@@ -63,7 +63,7 @@ namespace ProyectoFundaBD
                 DeshabilitarControlesEntrada();
             }
 
-            // Ocultar completamente botones de eliminación si no tiene permiso
+            // Ocultar completamente botones de eliminacion si no tiene permiso
             if (!Permisos.PuedeEliminar(rol))
             {
                 btneliminar.Visibility = Visibility.Collapsed;
@@ -98,7 +98,7 @@ namespace ProyectoFundaBD
 
                     dbsalarios.ItemsSource = bd.TablaSalarios.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     dbsalarios.Items.Refresh();
                 }
                 else
@@ -113,7 +113,7 @@ namespace ProyectoFundaBD
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Mostrar el menú principal
+            // Mostrar el menu principal
             MenuPrincipal menuPrincipal = new MenuPrincipal(miembroActual);
             menuPrincipal.Show();
 

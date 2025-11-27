@@ -100,7 +100,7 @@ namespace ProyectoFundaBD
 
                     dbfacturas.ItemsSource = bd.TablaFacturas.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     dbfacturas.Items.Refresh();
                 }
                 else
@@ -116,7 +116,7 @@ namespace ProyectoFundaBD
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Mostrar el menú principal
+            // Mostrar el menu principal
             MenuPrincipal menuPrincipal = new MenuPrincipal(miembroActual);
             menuPrincipal.Show();
 

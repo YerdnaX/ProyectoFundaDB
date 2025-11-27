@@ -33,6 +33,7 @@ namespace ProyectoFundaBD
             miembroActual = miembro;
             AplicarPermisos();
             CargarEventos();
+            CargarEventosDelMes();
             MostrarInfoUsuario();
             var dataService = new BaseDatos();
 
@@ -99,7 +100,7 @@ namespace ProyectoFundaBD
 
                     tablaeventos.ItemsSource = bd.TablaEventos.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     tablaeventos.Items.Refresh();
                 }
                 else
@@ -113,15 +114,38 @@ namespace ProyectoFundaBD
             }
         }
 
+        private void CargarEventosDelMes()
+        {
+            try
+            {
+                bd.MostrarEventosDelMes();
+
+                if (bd.TablaEventos != null && bd.TablaEventos.Rows.Count > 0)
+                {
+                    tablavistaeventos.ItemsSource = bd.TablaEventos.DefaultView;
+                    tablavistaeventos.Items.Refresh();
+
+                }
+                else
+                {
+                    MessageBox.Show("No hay eventos programados para este mes");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar eventos del mes: " + ex.Message);
+            }
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Mostrar el menú principal
+            // Mostrar el menu principal
             MenuPrincipal menuPrincipal = new MenuPrincipal(miembroActual);
             menuPrincipal.Show();
 
 
         }
-
+        
         private void btnborrar_Click(object sender, RoutedEventArgs e)
         {
 

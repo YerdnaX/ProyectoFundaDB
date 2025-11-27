@@ -1471,6 +1471,52 @@ namespace Clases
 
         }
 
+        //MOSTRAR LAS VISTAS DEL SQL
+
+        public void MostrarEventosDelMes()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                            titulo,
+                            tipo,
+                            fecha_hora,
+                            lugar,
+                            responsable
+                          FROM EVENTOSDELMES
+                          ORDER BY fecha_hora";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "EVENTOSDELMES");
+                TablaEventos = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperar eventos del mes: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
     }
 }
 

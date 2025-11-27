@@ -160,7 +160,7 @@ namespace ProyectoFundaBD
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Mostrar el menú principal
+            // Mostrar el menu principal
             PantallaPrincipal menuPrincipal = new PantallaPrincipal();
             menuPrincipal.Show();
 

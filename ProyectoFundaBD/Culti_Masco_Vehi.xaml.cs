@@ -64,7 +64,7 @@ namespace ProyectoFundaBD
                 DeshabilitarControlesEntrada();
             }
 
-            // Ocultar completamente botones de eliminación si no tiene permiso
+            // Ocultar completamente botones de eliminacion si no tiene permiso
             if (!Permisos.PuedeEliminar(rol))
             {
                 btneliminarcult.Visibility = Visibility.Collapsed;
@@ -109,7 +109,7 @@ namespace ProyectoFundaBD
 
                     dbcultivos.ItemsSource = bd.TablaCultivos.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     dbcultivos.Items.Refresh();
                 }
                 else
@@ -139,7 +139,7 @@ namespace ProyectoFundaBD
 
                     dbmascotas.ItemsSource = bd.TablaMascotas.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     dbmascotas.Items.Refresh();
                 }
                 else
@@ -168,7 +168,7 @@ namespace ProyectoFundaBD
 
                     dbvehiculo.ItemsSource = bd.TablaVehiculos.DefaultView;
 
-                    // Forzar actualización de la UI
+                    // Forzar actualizacion de la UI
                     dbvehiculo.Items.Refresh();
                 }
                 else
@@ -184,7 +184,7 @@ namespace ProyectoFundaBD
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Mostrar el menú principal
+            // Mostrar el menu principal
             MenuPrincipal menuPrincipal = new MenuPrincipal(miembroActual);
             menuPrincipal.Show();
 

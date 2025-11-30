@@ -764,50 +764,6 @@ namespace Clases
             }
 
         }
-        public void MostrarAsignacionTareas()
-        {
-
-            SqlCommand sql_instruccion;
-            string instruccion = @"SELECT 
-                                ta.id_tarea,
-                                t.titulo AS nombre_tarea,
-                                ta.id_miembro, 
-                                m.nombre AS nombre_miembro
-                                FROM tareas_asignaciones ta
-                                INNER JOIN tareas t ON ta.id_tarea = t.id_tarea
-                                INNER JOIN miembros m ON ta.id_miembro = m.id_miembro";
-            SqlDataAdapter sqlDA;
-
-            if (dsTablas == null)
-            {
-                dsTablas = new DataSet();
-            }
-
-            if (dsTablas.Tables.Count > 0)
-            {
-                dsTablas.Tables.Clear();
-            }
-
-            EstablecerConexion();
-
-            sql_instruccion = new SqlCommand(instruccion, _conexion);
-            sqlDA = new SqlDataAdapter(sql_instruccion);
-
-            try
-            {
-                sqlDA.Fill(dsTablas, "tareas_asignaciones");
-                TablaAsignacion_Tareas = dsTablas.Tables[0];
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al recuperar asignacion tareas: " + ex.Message);
-            }
-            finally
-            {
-                _conexion.Close();
-            }
-
-        }
         public void MostrarEventos()
         {
 
@@ -850,54 +806,6 @@ namespace Clases
             catch (Exception ex)
             {
                 throw new Exception("Error al recuperar asignacion eventos: " + ex.Message);
-            }
-            finally
-            {
-                _conexion.Close();
-            }
-
-        }
-        public void MostrarFacturas()
-        {
-
-            SqlCommand sql_instruccion;
-            string instruccion = @"SELECT
-                                pro.nombre   AS Proveedor,
-                                fac.monto AS Monto,
-                                cat.nombre AS Categoria,
-                                fac.fecha_emision AS Emision,
-                                fac.fecha_venc AS Vencimiento,
-                                fac.estado AS Estado
-                                FROM facturas fac
-                                INNER JOIN proveedores pro ON fac.id_proveedor = pro.id_proveedor
-                                INNER JOIN categorias_finanzas cat ON fac.categoria_id = cat.id_categoria
-                                ORDER BY fac.monto";
-            SqlDataAdapter sqlDA;
-
-            if (dsTablas == null)
-            {
-                dsTablas = new DataSet();
-            }
-
-            if (dsTablas.Tables.Count > 0)
-            {
-                dsTablas.Tables.Clear();
-            }
-
-            EstablecerConexion();
-
-            sql_instruccion = new SqlCommand(instruccion, _conexion);
-            sqlDA = new SqlDataAdapter(sql_instruccion);
-
-            try
-            {
-                sqlDA.Fill(dsTablas, "facturas");
-                TablaFacturas = dsTablas.Tables[0];
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al recuperar asignacion facturas: " + ex.Message);
             }
             finally
             {
@@ -1427,49 +1335,7 @@ namespace Clases
             }
 
         }
-        public void MostrarMantenimiento()
-        {
-
-            SqlCommand sql_instruccion;
-            string instruccion = @"SELECT v.placa, m.tipo, 
-                                   m.concepto, m.fecha, m.kilometraje,m.costo,
-                                   m.taller, m.notas       
-                                 FROM vehiculos_mantenimientos m
-                                 INNER JOIN vehiculos v ON m.id_vehiculo = v.id_vehiculo";
-
-            SqlDataAdapter sqlDA;
-
-            if (dsTablas == null)
-            {
-                dsTablas = new DataSet();
-            }
-
-            if (dsTablas.Tables.Count > 0)
-            {
-                dsTablas.Tables.Clear();
-            }
-
-            EstablecerConexion();
-
-            sql_instruccion = new SqlCommand(instruccion, _conexion);
-            sqlDA = new SqlDataAdapter(sql_instruccion);
-
-            try
-            {
-                sqlDA.Fill(dsTablas, "vehiculos_mantenimientos");
-                TablaMantenimiento = dsTablas.Tables[0];
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al recuperar asignacion mantenimiento: " + ex.Message);
-            }
-            finally
-            {
-                _conexion.Close();
-            }
-
-        }
+ 
 
         //MOSTRAR LAS VISTAS DEL SQL
 
@@ -1510,6 +1376,403 @@ namespace Clases
             catch (Exception ex)
             {
                 throw new Exception("Error al recuperar eventos del mes: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarResumenFinanciera()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                           Categoria,
+                            tipo,
+                            [Total Movimientos],
+                            [Cantidad de movimientos]
+                          FROM RESUMENFINANCIERO";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "RESUMENFINANCIERO");
+                TablaMovimiento = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperar resumen financiera: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarTareasPendientes()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                            Miembro,
+                            Tarea,
+                            Lista,
+                            prioridad,
+                            fecha_limite,
+                            area
+                          FROM TAREASPENDIENTES
+                          ORDER BY fecha_limite";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "TAREASPENDIENTES");
+                TablaAsignacion_Tareas = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperar tareas pendientes: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarFacturasAVencer()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                           Proveedor,
+                            monto,
+                            fecha_venc,
+                            Categoria,
+                            [Dias para vencer]
+                          FROM FACTURASAVENCER
+                          ORDER BY fecha_venc";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "FACTURASAVENCER");
+                TablaFacturas = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperar facturas a vencer: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarTotalFacturasPagar()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                           [Cantidad de facturas],
+                           [Monto total pendiente]
+                          FROM TOTALFACTURASPAGAR";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "TOTALFACTURASPAGAR");
+                TablaFacturas = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperar total de facturas: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarManteVehiculo()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                           placa,
+                           marca,
+                           modelo,
+                           [Tipo Mantenimiento],
+                           concepto,
+                           fecha,
+                           kilometraje,
+                           costo,
+                           [Dias desde el mantenimiento]
+                          FROM MANTEVEHICULO";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "MANTEVEHICULO");
+                TablaMantenimiento = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperar mantenimiento vehiculo: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarResumenManteVehiculo()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                           placa,
+                           marca,
+                           modelo,
+                           anio,
+                           dekra_fecha,
+                           [Días para DEKRA],
+                           [Total Mantenimientos],
+                           [Último Mantenimiento]
+                          FROM RESUMENVEHICULOS";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "RESUMENVEHICULOS");
+                TablaMantenimiento = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperar resumen mantenimiento vehiculo: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarSaludMascota()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                           Mascota,
+                           especie,
+                           raza,
+                           [Ultima vista],
+                           motivo,
+                           costo,
+                           [Ultimo evento],
+                           [fecha evento]
+                          FROM SALUDMASCOTA";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "SALUDMASCOTA");
+                TablaSalud = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperars salud mascpta: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarMedicamentosActivos()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                           Mascota,
+                           Medicamento,
+                           dosis,
+                           frecuencia,
+                           fecha_ini,
+                           fecha_fin,
+                           [Dias Restantes]
+                          FROM MEDICAMENTOSACTIVOS";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "MEDICAMENTOSACTIVOS");
+                TablaMedicamentos = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperars medicamentos mascota: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+
+        public void MostrarGastosVeterinaria()
+        {
+            SqlCommand sql_instruccion;
+            string instruccion = @"SELECT 
+                           Mascota,
+                           especie,
+                           [Cantidad Visitas],
+                           [Total Gastado]
+                          FROM GASTOVETERINARIOPORMASCOTA";
+
+            SqlDataAdapter sqlDA;
+
+            if (dsTablas == null)
+            {
+                dsTablas = new DataSet();
+            }
+
+            if (dsTablas.Tables.Count > 0)
+            {
+                dsTablas.Tables.Clear();
+            }
+
+            EstablecerConexion();
+
+            sql_instruccion = new SqlCommand(instruccion, _conexion);
+            sqlDA = new SqlDataAdapter(sql_instruccion);
+
+            try
+            {
+                sqlDA.Fill(dsTablas, "GASTOVETERINARIOPORMASCOTA");
+                TablaVeterinaria = dsTablas.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al recuperars gastos veterinaria: " + ex.Message);
             }
             finally
             {

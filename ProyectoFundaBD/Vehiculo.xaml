@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoFundaBD"
         mc:Ignorable="d"
-        Title="Listas y Tareas" Height="750" Width="900"
+        Title="Listas y Tareas" Height="750" Width="1300"
         Closing="Window_Closing"
         ResizeMode="CanMinimize">
     <Grid x:Name="area">
@@ -19,7 +19,7 @@
                 <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Label Content="Mantenimiento Vehiculo" HorizontalAlignment="Left" Margin="144,27,0,0" VerticalAlignment="Top" Width="624" FontFamily="Cooper Black" FontSize="48" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.5,0.5">
+        <Label Content="Mantenimiento Vehiculo" HorizontalAlignment="Center" Margin="0,37,0,0" VerticalAlignment="Top" Width="624" FontFamily="Cooper Black" FontSize="48" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -29,17 +29,17 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label Content="Vehiculo:" HorizontalAlignment="Left" Margin="137,116,0,0" VerticalAlignment="Top" Width="135" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Tipo:" HorizontalAlignment="Left" Margin="137,170,0,0" VerticalAlignment="Top" Width="98" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Concepto:" HorizontalAlignment="Left" Margin="137,228,0,0" VerticalAlignment="Top" Width="176" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Fecha:" HorizontalAlignment="Left" Margin="137,287,0,0" VerticalAlignment="Top" Width="159" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Costo:" HorizontalAlignment="Left" Margin="470,172,0,0" VerticalAlignment="Top" Width="159" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Taller:" HorizontalAlignment="Left" Margin="463,226,0,0" VerticalAlignment="Top" Width="139" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Notas:" HorizontalAlignment="Left" Margin="470,284,0,0" VerticalAlignment="Top" Width="139" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Kilometraje" HorizontalAlignment="Left" Margin="470,117,0,0" VerticalAlignment="Top" Width="159" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Vehiculo:" HorizontalAlignment="Left" Margin="33,145,0,0" VerticalAlignment="Top" Width="135" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Tipo:" HorizontalAlignment="Left" Margin="33,199,0,0" VerticalAlignment="Top" Width="98" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Concepto:" HorizontalAlignment="Left" Margin="33,257,0,0" VerticalAlignment="Top" Width="176" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Fecha:" HorizontalAlignment="Left" Margin="33,316,0,0" VerticalAlignment="Top" Width="159" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Costo:" HorizontalAlignment="Left" Margin="366,201,0,0" VerticalAlignment="Top" Width="159" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Taller:" HorizontalAlignment="Left" Margin="359,255,0,0" VerticalAlignment="Top" Width="139" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Notas:" HorizontalAlignment="Left" Margin="366,313,0,0" VerticalAlignment="Top" Width="139" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Kilometraje" HorizontalAlignment="Left" Margin="366,146,0,0" VerticalAlignment="Top" Width="159" FontFamily="Cooper Black" FontSize="24" FontWeight="Bold" Foreground="White"/>
         <ComboBox x:Name="boxvehiculo" 
             HorizontalAlignment="Left" 
-            Margin="272,128,0,0" 
+            Margin="168,157,0,0" 
             VerticalAlignment="Top" 
             Width="142" 
             FontFamily="Arial Narrow" 
@@ -48,9 +48,10 @@
             DisplayMemberPath="Placa"
             SelectedValuePath="ID_vehiculo" Height="26">
         </ComboBox>
-        <TextBox x:Name="txtconcepto" HorizontalAlignment="Left" Margin="272,243,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
-        <DatePicker x:Name="fecha" HorizontalAlignment="Left" Margin="272,291,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dbmante" AutoGenerateColumns="False" Margin="153,431,118,57"
+        <TextBox x:Name="txtconcepto" HorizontalAlignment="Left" Margin="168,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
+        <DatePicker x:Name="fecha" HorizontalAlignment="Left" Margin="168,320,0,0" VerticalAlignment="Top"/>
+
+        <DataGrid x:Name="dbmante" AutoGenerateColumns="False" Margin="685,193,26,367"
           IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
@@ -58,7 +59,7 @@
           Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
           RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
-          GridLinesVisibility="None" RowHeight="35">
+          GridLinesVisibility="None" RowHeight="35" Grid.ColumnSpan="2">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -99,7 +100,27 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="TIPO" Binding="{Binding tipo}" Width="*">
+                <DataGridTextColumn Header="MARCA" Binding="{Binding marca}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="MODELO" Binding="{Binding modelo}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="TIPO" Binding="{Binding [Tipo Mantenimiento]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -129,7 +150,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="KILOMETRAJE" Binding="{Binding kilometraje}" Width="*">
+                <DataGridTextColumn Header="KILOM." Binding="{Binding kilometraje}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -148,18 +169,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-
-                <DataGridTextColumn Header="TALLER" Binding="{Binding taller}" Width="*">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Left"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="Padding" Value="8,5,8,5"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="NOTAS" Binding="{Binding notas}" Width="*">
+                <DataGridTextColumn Header="DESDE" Binding="{Binding [Dias desde el mantenimiento]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -170,33 +180,173 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox x:Name="boxtipo" HorizontalAlignment="Left" Margin="272,181,0,0" VerticalAlignment="Top" Width="142" Height="26">
+        <ComboBox x:Name="boxtipo" HorizontalAlignment="Left" Margin="168,210,0,0" VerticalAlignment="Top" Width="142" Height="26">
             <ComboBoxItem Content="PREVENTIVO"/>
             <ComboBoxItem Content="CORRECTIVO"/>
             <ComboBoxItem Content="OTRO"/>
         </ComboBox>
-        <TextBox x:Name="txtkilometraje" HorizontalAlignment="Left" Margin="634,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtcosto" HorizontalAlignment="Left" Margin="634,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtcosto_Copiar" HorizontalAlignment="Left" Margin="634,243,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtnotas" HorizontalAlignment="Left" Margin="634,303,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="139,355,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="176">
+        <TextBox x:Name="txtkilometraje" HorizontalAlignment="Left" Margin="530,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtcosto" HorizontalAlignment="Left" Margin="530,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtcosto_Copiar" HorizontalAlignment="Left" Margin="530,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtnotas" HorizontalAlignment="Left" Margin="530,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="78,437,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="236" FontSize="16">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
-                <TextBlock Text="Agregar Salario" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
+                <Image Source="/Imagenes/anadir.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                <TextBlock Text="Agregar Matenimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="356,355,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="196">
+        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="372,437,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="256" FontSize="16">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
-                <TextBlock Text="Modificar Salario" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
+                <Image Source="/Imagenes/editar.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                <TextBlock Text="Modificar Mantenimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminar" HorizontalAlignment="Left" Margin="591,355,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="165">
+        <Button x:Name="btneliminar" HorizontalAlignment="Left" Margin="218,520,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="258" FontSize="16">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
-                <TextBlock Text="Eliminar Salario" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
+                <Image Source="/Imagenes/borrar.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                <TextBlock Text="Eliminar Mantenimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
+        <DataGrid x:Name="dbresumen" AutoGenerateColumns="False" Margin="685,465,26,95"
+            IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+            CanUserReorderColumns="False" CanUserResizeColumns="True"
+            CanUserResizeRows="False" CanUserSortColumns="True"
+            SelectionMode="Single" SelectionUnit="FullRow"
+            Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
+            RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
+            FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
+            GridLinesVisibility="None" RowHeight="35" Grid.ColumnSpan="2">
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#FF0003F1"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="8,5"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="PLACA" Binding="{Binding placa}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="MARCA" Binding="{Binding marca}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="MODELO" Binding="{Binding modelo}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="AÑO" Binding="{Binding anio}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="DEKRA" Binding="{Binding dekra_fecha}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="DIAS DEKRA" Binding="{Binding [Días para DEKRA]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="TOTAL MAT.." Binding="{Binding [Total Mantenimientos]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="ULTIMO MAT" Binding="{Binding [Último Mantenimiento]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Mantenimiento" HorizontalAlignment="Left" Margin="914,151,0,0" VerticalAlignment="Top" Width="155" FontFamily="Cooper Black" FontSize="18" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.324"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label Content="Resumen Mantenimiento" HorizontalAlignment="Left" Margin="874,423,0,0" VerticalAlignment="Top" Width="237" FontFamily="Cooper Black" FontSize="18" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.324"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
 
     </Grid>
 </Window>

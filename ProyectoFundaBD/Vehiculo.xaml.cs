@@ -34,7 +34,8 @@ namespace ProyectoFundaBD
             MostrarInfoUsuario();
             var dataService = new BaseDatos();
             Vehicu = dataService.LlenarComboVehiculo();
-            CargarMantenimiento();
+            CargarMantVehiculo();
+            CargarResumenMantVehiculo();
             DataContext = this;
 
         }
@@ -81,33 +82,48 @@ namespace ProyectoFundaBD
             boxtipo.IsEnabled = false;
             boxvehiculo.IsEnabled = false;
         }
-        private void CargarMantenimiento()
+        private void CargarMantVehiculo()
         {
             try
             {
-                bd.MostrarMantenimiento();
+                bd.MostrarManteVehiculo();
 
                 if (bd.TablaMantenimiento != null && bd.TablaMantenimiento.Rows.Count > 0)
                 {
-
-                    foreach (DataRow row in bd.TablaMantenimiento.Rows)
-                    {
-                        Console.WriteLine($"Tipo: {row["tipo"]}, Concepto: {row["concepto"]}");
-                    }
-
                     dbmante.ItemsSource = bd.TablaMantenimiento.DefaultView;
-
-                    // Forzar actualizacion de la UI
                     dbmante.Items.Refresh();
+
                 }
                 else
                 {
-                    MessageBox.Show("No se encontraron registros en la tabla de mantenimiento");
+                    MessageBox.Show("No hay mantenimiento de vehiculo");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar mantenimiento: " + ex.Message);
+                MessageBox.Show("Error al cargar mantenimiento vehiculo: " + ex.Message);
+            }
+        }
+        private void CargarResumenMantVehiculo()
+        {
+            try
+            {
+                bd.MostrarResumenManteVehiculo();
+
+                if (bd.TablaMantenimiento != null && bd.TablaMantenimiento.Rows.Count > 0)
+                {
+                    dbresumen.ItemsSource = bd.TablaMantenimiento.DefaultView;
+                    dbresumen.Items.Refresh();
+
+                }
+                else
+                {
+                    MessageBox.Show("No hay mantenimiento de vehiculo");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar resumen mantenimiento vehiculo: " + ex.Message);
             }
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

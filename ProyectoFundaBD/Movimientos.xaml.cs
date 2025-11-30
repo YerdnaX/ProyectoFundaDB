@@ -33,6 +33,7 @@ namespace ProyectoFundaBD
             miembroActual = miembro;
             AplicarPermisos();
             CargarMovimientos();
+            CargarResumenFinanciero();
             MostrarInfoUsuario();
             var dataService = new BaseDatos();
             Categorias_Finanzas = dataService.LlenarComboCategoriasFinanzas();
@@ -114,6 +115,30 @@ namespace ProyectoFundaBD
                 MessageBox.Show("Error al cargar movimientos: " + ex.Message);
             }
         }
+
+        private void CargarResumenFinanciero()
+        {
+            try
+            {
+                bd.MostrarResumenFinanciera();
+
+                if (bd.TablaMovimiento != null && bd.TablaMovimiento.Rows.Count > 0)
+                {
+                    dbresumen.ItemsSource = bd.TablaMovimiento.DefaultView;
+                    dbresumen.Items.Refresh();
+
+                }
+                else
+                {
+                    MessageBox.Show("No hay resumen financiero");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar resumen financiero: " + ex.Message);
+            }
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Mostrar el menu principal

@@ -34,7 +34,7 @@ namespace ProyectoFundaBD
             miembroActual = miembro;
             AplicarPermisos();
             MostrarInfoUsuario();
-            CargarAsginacionTareas();
+            CargarTareasPendientes();
             var dataService = new BaseDatos();
             Tareas = dataService.LlenarComboConTareas();
             Miembros = dataService.LlenarComboConMiembros();
@@ -77,33 +77,26 @@ namespace ProyectoFundaBD
             boxmiembro.IsEnabled = false;
             boxtarea.IsEnabled = false;
         }
-        private void CargarAsginacionTareas()
+        private void CargarTareasPendientes()
         {
             try
             {
-                bd.MostrarAsignacionTareas();
+                bd.MostrarTareasPendientes();
 
                 if (bd.TablaAsignacion_Tareas != null && bd.TablaAsignacion_Tareas.Rows.Count > 0)
                 {
+                    dbtareaspendientes.ItemsSource = bd.TablaAsignacion_Tareas.DefaultView;
+                    dbtareaspendientes.Items.Refresh();
 
-                    foreach (DataRow row in bd.TablaAsignacion_Tareas.Rows)
-                    {
-                        Console.WriteLine($"Tarea: {row["nombre_tarea"]}, Miembro: {row["nombre_miembro"]}");
-                    }
-
-                    dbasignaciones.ItemsSource = bd.TablaAsignacion_Tareas.DefaultView;
-
-                    // Forzar actualizacion de la UI
-                    dbasignaciones.Items.Refresh();
                 }
                 else
                 {
-                    MessageBox.Show("No se encontraron registros en la tabla de asignacion");
+                    MessageBox.Show("No hay tareas pendientes");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar asignacion: " + ex.Message);
+                MessageBox.Show("Error al cargar tareas pendientes: " + ex.Message);
             }
         }
 

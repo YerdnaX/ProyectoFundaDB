@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoFundaBD"
         mc:Ignorable="d"
-        Title="Finanzas" Height="550" Width="800"
+        Title="Finanzas" Height="650" Width="1000"
         Closing="Window_Closing"
         ResizeMode="CanMinimize">
     <Grid>
@@ -15,15 +15,15 @@
                 <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Label Content="Movimientos" HorizontalAlignment="Center" VerticalAlignment="Top" Width="332" FontFamily="Cooper Black" FontSize="48" FontWeight="Bold" Foreground="White" Height="68"/>
-        <Label Content="Fecha:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="116,82,0,0"/>
-        <Label Content="Tipo:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="116,127,0,0"/>
-        <Label Content="Categoria:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="116,172,0,0"/>
-        <Label Content="Referencia:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="434,147,0,0"/>
-        <Label Content="Monto:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="212" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="434,107,0,0"/>
+        <Label Content="Movimientos" HorizontalAlignment="Left" VerticalAlignment="Top" Width="332" FontFamily="Cooper Black" FontSize="48" FontWeight="Bold" Foreground="White" Height="68" Margin="136,10,0,0"/>
+        <Label Content="Fecha:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="140,107,0,0"/>
+        <Label Content="Tipo:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="140,152,0,0"/>
+        <Label Content="Categoria:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="136,203,0,0"/>
+        <Label Content="Ref:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="40" Margin="140,294,0,0"/>
+        <Label Content="Monto:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" FontFamily="Cooper Black" FontSize="20" FontWeight="Bold" Foreground="White" Height="29" Margin="140,250,0,0"/>
         <ComboBox x:Name="boxcategoria" 
           HorizontalAlignment="Left" 
-          Margin="239,178,0,0" 
+          Margin="263,203,0,0" 
           VerticalAlignment="Top" 
           Width="143" 
           FontFamily="Arial Narrow" 
@@ -32,7 +32,7 @@
           DisplayMemberPath="Nombre_categoria"
           SelectedValuePath="ID_categoria" Height="28">
         </ComboBox>
-        <DataGrid x:Name="dbmovimiento" AutoGenerateColumns="False" Margin="69,301,69,22"
+        <DataGrid x:Name="dbmovimiento" AutoGenerateColumns="False" Margin="524,76,48,326"
           IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
@@ -122,31 +122,114 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox x:Name="boxtipo" HorizontalAlignment="Left" Margin="239,132,0,0" VerticalAlignment="Top" Width="143" Height="28">
+        <ComboBox x:Name="boxtipo" HorizontalAlignment="Left" Margin="263,157,0,0" VerticalAlignment="Top" Width="143" Height="28">
             <ComboBoxItem Content="INGRESO"/>
             <ComboBoxItem Content="EGRESO"/>
 
         </ComboBox>
-        <TextBox x:Name="txtreferencia" HorizontalAlignment="Left" Margin="574,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtmonto" HorizontalAlignment="Left" Margin="574,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <DatePicker x:Name="fecha" HorizontalAlignment="Left" Margin="234,87,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="116,238,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="175">
+        <TextBox x:Name="txtreferencia" HorizontalAlignment="Left" Margin="263,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="txtmonto" HorizontalAlignment="Left" Margin="263,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+        <DatePicker x:Name="fecha" HorizontalAlignment="Left" Margin="258,112,0,0" VerticalAlignment="Top" Width="148"/>
+        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="107,384,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="161">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Movimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="310,238,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="196">
+        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="312,384,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="166">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Movimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminar" HorizontalAlignment="Left" Margin="536,238,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="165">
+        <Button x:Name="btneliminar" HorizontalAlignment="Left" Margin="209,439,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="165">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Movimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
+        <DataGrid x:Name="dbresumen" AutoGenerateColumns="False" Margin="524,379,48,51"
+            IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+            CanUserReorderColumns="False" CanUserResizeColumns="True"
+            CanUserResizeRows="False" CanUserSortColumns="True"
+            SelectionMode="Single" SelectionUnit="FullRow"
+            Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
+            RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
+            FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
+            GridLinesVisibility="None" RowHeight="35">
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#FF0003F1"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="8,5"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="CATEGORIA" Binding="{Binding Categoria}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="TIPO" Binding="{Binding tipo}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="TOTAL MOV" Binding="{Binding [Total Movimientos]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="CANT MOV" Binding="{Binding [Cantidad de movimientos]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Info. General" HorizontalAlignment="Left" VerticalAlignment="Top" Width="212" FontFamily="Cooper Black" FontSize="30" FontWeight="Bold" Foreground="White" Height="61" Margin="632,17,0,0"/>
+        <Label Content="Resumen Financiero" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" FontFamily="Cooper Black" FontSize="30" FontWeight="Bold" Foreground="White" Height="61" Margin="578,318,0,0"/>
     </Grid>
 </Window>

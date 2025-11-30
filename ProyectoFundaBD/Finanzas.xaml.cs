@@ -32,7 +32,8 @@ namespace ProyectoFundaBD
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             miembroActual = miembro;
             AplicarPermisos();
-            CargarFacturas();
+            CargarFacturasAVencer();
+            CargarTotalDeFacturas();
             MostrarInfoUsuario();
             var dataService = new BaseDatos();
             Proveedores = dataService.LlenarComboConProveedores();
@@ -84,33 +85,49 @@ namespace ProyectoFundaBD
             boxproveedor.IsEnabled = false;
         }
 
-        private void CargarFacturas()
+        private void CargarFacturasAVencer()
         {
             try
             {
-                bd.MostrarFacturas();
+                bd.MostrarFacturasAVencer();
 
                 if (bd.TablaFacturas != null && bd.TablaFacturas.Rows.Count > 0)
                 {
+                    dbfacturasvencer.ItemsSource = bd.TablaFacturas.DefaultView;
+                    dbfacturasvencer.Items.Refresh();
 
-                    foreach (DataRow row in bd.TablaFacturas.Rows)
-                    {
-                        Console.WriteLine($"Monto: {row["monto"]}");
-                    }
-
-                    dbfacturas.ItemsSource = bd.TablaFacturas.DefaultView;
-
-                    // Forzar actualizacion de la UI
-                    dbfacturas.Items.Refresh();
                 }
                 else
                 {
-                    MessageBox.Show("No se encontraron registros en la tabla de facturas");
+                    MessageBox.Show("No hay facturas a vencer");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar facturas: " + ex.Message);
+                MessageBox.Show("Error al cargar facturas a vencer: " + ex.Message);
+            }
+        }
+
+        private void CargarTotalDeFacturas()
+        {
+            try
+            {
+                bd.MostrarTotalFacturasPagar();
+
+                if (bd.TablaFacturas != null && bd.TablaFacturas.Rows.Count > 0)
+                {
+                    dbfacturaspagar.ItemsSource = bd.TablaFacturas.DefaultView;
+                    dbfacturaspagar.Items.Refresh();
+
+                }
+                else
+                {
+                    MessageBox.Show("No hay facturas a pagar");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar totoal de facturas: " + ex.Message);
             }
         }
 

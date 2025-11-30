@@ -40,7 +40,7 @@
             DisplayMemberPath="Nombre"
             SelectedValuePath="ID_Miembros" Height="27">
         </ComboBox>
-        <DataGrid x:Name="dbasignaciones" AutoGenerateColumns="False" Margin="198,217,174,30"
+        <DataGrid x:Name="dbtareaspendientes" AutoGenerateColumns="False" Margin="84,217,102,30"
           IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
@@ -79,7 +79,7 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="TAREA" Binding="{Binding nombre_tarea}" Width="*">
+                <DataGridTextColumn Header="MIEMBRO" Binding="{Binding Miembro}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -89,7 +89,45 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="MIEMBRO" Binding="{Binding nombre_miembro}" Width="*">
+                <DataGridTextColumn Header="TAREA" Binding="{Binding Tarea}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="LISTA" Binding="{Binding Lista}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="PRIORIDAD" Binding="{Binding prioridad}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="LIMITE" Binding="{Binding fecha_limite}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="AREA" Binding="{Binding area}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>

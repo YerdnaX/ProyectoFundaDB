@@ -52,7 +52,7 @@
         <DatePicker x:Name="fechaemision" HorizontalAlignment="Left" Margin="205,225,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="fechavencimiento" HorizontalAlignment="Left" Margin="536,95,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtmonto" HorizontalAlignment="Left" Margin="205,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <DataGrid x:Name="dbfacturas" AutoGenerateColumns="False" Margin="65,290,68,22"
+        <DataGrid x:Name="dbfacturasvencer" AutoGenerateColumns="False" Margin="28,337,380,22"
           IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
@@ -101,7 +101,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="MONTO" Binding="{Binding Monto}" Width="*">
+                <DataGridTextColumn Header="MONTO" Binding="{Binding monto}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -111,7 +111,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="CATEGORIA" Binding="{Binding Categoria}" Width="*">
+                <DataGridTextColumn Header="VENC." Binding="{Binding fecha_venc}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -121,7 +121,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="EMISION" Binding="{Binding Emision}" Width="*">
+                <DataGridTextColumn Header="CATEG." Binding="{Binding Categoria}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -131,17 +131,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="VENCIMIENTO" Binding="{Binding Vencimiento}" Width="*">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Left"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="Padding" Value="8,5,8,5"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="ESTADO" Binding="{Binding Estado}" Width="*">
+                <DataGridTextColumn Header="DIAS" Binding="{Binding [Dias para vencer]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -170,5 +160,67 @@
                 <TextBlock Text="Borrar Facturas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
+        <DataGrid x:Name="dbfacturaspagar" AutoGenerateColumns="False" Margin="440,337,24,22"
+            IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+            CanUserReorderColumns="False" CanUserResizeColumns="True"
+            CanUserResizeRows="False" CanUserSortColumns="True"
+            SelectionMode="Single" SelectionUnit="FullRow"
+            Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
+            RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
+            FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
+            GridLinesVisibility="None" RowHeight="35">
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#FF0003F1"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="8,5"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="CANT. FACTURAS" Binding="{Binding [Cantidad de facturas]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="MONTO TOTAL PENDIENTE" Binding="{Binding [Monto total pendiente]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,5,8,5"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Facturas Vencidad/Pendientes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontFamily="Cooper Black" FontSize="18" FontWeight="Bold" Foreground="White" Height="40" Margin="80,297,0,0"/>
+        <Label Content="Total de Facturas por pagar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="264" FontFamily="Cooper Black" FontSize="18" FontWeight="Bold" Foreground="White" Height="40" Margin="476,297,0,0"/>
     </Grid>
 </Window>

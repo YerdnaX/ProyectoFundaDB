@@ -15,22 +15,22 @@
                 <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Label Content="Cultivos del Hogar" HorizontalAlignment="Left" Margin="112,87,0,0" VerticalAlignment="Top" Width="233" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Vehiculos" HorizontalAlignment="Left" Margin="864,87,0,0" VerticalAlignment="Top" Width="200" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Mascotas:" HorizontalAlignment="Left" Margin="520,88,0,0" VerticalAlignment="Top" Width="157" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Cultivos del Hogar" HorizontalAlignment="Left" Margin="88,99,0,0" VerticalAlignment="Top" Width="233" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Vehiculos" HorizontalAlignment="Left" Margin="829,89,0,0" VerticalAlignment="Top" Width="200" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Mascotas:" HorizontalAlignment="Center" Margin="0,90,0,0" VerticalAlignment="Top" Width="157" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
         <Label Content="Informacion General del Hogar" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="768" FontFamily="Cooper Black" FontSize="48" FontWeight="Bold" Foreground="White" Height="73"/>
-        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="90,188,0,0" VerticalAlignment="Top" Width="120" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Detalle:" HorizontalAlignment="Left" Margin="90,235,0,0" VerticalAlignment="Top" Width="120" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="458,125,0,0" VerticalAlignment="Top" Width="119" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Placa:" HorizontalAlignment="Left" Margin="804,125,0,0" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Especie:" HorizontalAlignment="Left" Margin="458,176,0,0" VerticalAlignment="Top" Width="104" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Marca:" HorizontalAlignment="Left" Margin="804,165,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <TextBox x:Name="txtnombrecultivo" HorizontalAlignment="Left" Margin="216,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtnombremascota" HorizontalAlignment="Left" Margin="577,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtplaca" HorizontalAlignment="Left" Margin="922,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtdetalle" HorizontalAlignment="Left" Margin="216,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="boxespecie" HorizontalAlignment="Left" Margin="577,185,0,0" VerticalAlignment="Top" Width="120"/>
-        <DataGrid x:Name="dbcultivos" AutoGenerateColumns="False" Margin="66,554,734,38"
+        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="66,200,0,0" VerticalAlignment="Top" Width="120" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Detalle:" HorizontalAlignment="Left" Margin="66,247,0,0" VerticalAlignment="Top" Width="120" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="410,127,0,0" VerticalAlignment="Top" Width="119" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Placa:" HorizontalAlignment="Left" Margin="769,127,0,0" VerticalAlignment="Top" Width="118" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Especie:" HorizontalAlignment="Left" Margin="410,178,0,0" VerticalAlignment="Top" Width="104" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Marca:" HorizontalAlignment="Left" Margin="769,167,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <TextBox x:Name="txtnombrecultivo" HorizontalAlignment="Left" Margin="192,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtnombremascota" HorizontalAlignment="Left" Margin="529,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtplaca" HorizontalAlignment="Left" Margin="887,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtdetalle" HorizontalAlignment="Left" Margin="192,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="boxespecie" HorizontalAlignment="Left" Margin="529,187,0,0" VerticalAlignment="Top" Width="120"/>
+        <DataGrid x:Name="dbcultivos" AutoGenerateColumns="False" Margin="36,554,764,38"
           IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
@@ -90,7 +90,7 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dbmascotas" AutoGenerateColumns="False" Margin="422,554,378,38"
+        <DataGrid x:Name="dbmascotas" AutoGenerateColumns="False" Margin="391,554,409,38"
           IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
@@ -180,7 +180,7 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dbvehiculo" AutoGenerateColumns="False" Margin="753,554,10,38" CanUserAddRows="False" CanUserDeleteRows="False"
+        <DataGrid x:Name="dbvehiculo" AutoGenerateColumns="False" Margin="729,554,34,38" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
           SelectionMode="Single" SelectionUnit="FullRow"
@@ -279,70 +279,70 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Raza:" HorizontalAlignment="Left" Margin="458,224,0,0" VerticalAlignment="Top" Width="104" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <TextBox x:Name="txtraza" HorizontalAlignment="Left" Margin="577,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Nacim:" HorizontalAlignment="Left" Margin="458,272,0,0" VerticalAlignment="Top" Width="150" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Peso:" HorizontalAlignment="Left" Margin="458,312,0,0" VerticalAlignment="Top" Width="150" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <TextBox x:Name="txtpesp" HorizontalAlignment="Left" Margin="577,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Modelo:" HorizontalAlignment="Left" Margin="804,208,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Año:" HorizontalAlignment="Left" Margin="804,250,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Poliza:" HorizontalAlignment="Left" Margin="804,294,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <Label Content="Dekra:" HorizontalAlignment="Left" Margin="804,332,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
-        <TextBox x:Name="txtpoliza" HorizontalAlignment="Left" Margin="922,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtyear" HorizontalAlignment="Left" Margin="922,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtmodelo" HorizontalAlignment="Left" Margin="922,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtmarca" HorizontalAlignment="Left" Margin="922,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <DatePicker x:Name="fechamascota" HorizontalAlignment="Left" Margin="577,278,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="fechadekra" HorizontalAlignment="Left" Margin="922,340,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnagregarcult" HorizontalAlignment="Left" Margin="146,331,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="146">
+        <Label Content="Raza:" HorizontalAlignment="Left" Margin="410,226,0,0" VerticalAlignment="Top" Width="104" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <TextBox x:Name="txtraza" HorizontalAlignment="Left" Margin="529,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Nacim:" HorizontalAlignment="Left" Margin="410,274,0,0" VerticalAlignment="Top" Width="150" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Peso:" HorizontalAlignment="Left" Margin="410,314,0,0" VerticalAlignment="Top" Width="150" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <TextBox x:Name="txtpesp" HorizontalAlignment="Left" Margin="529,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Modelo:" HorizontalAlignment="Left" Margin="769,210,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Año:" HorizontalAlignment="Left" Margin="769,252,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Poliza:" HorizontalAlignment="Left" Margin="769,296,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <Label Content="Dekra:" HorizontalAlignment="Left" Margin="769,334,0,0" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White" Height="40"/>
+        <TextBox x:Name="txtpoliza" HorizontalAlignment="Left" Margin="887,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtyear" HorizontalAlignment="Left" Margin="887,263,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtmodelo" HorizontalAlignment="Left" Margin="887,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtmarca" HorizontalAlignment="Left" Margin="887,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="fechamascota" HorizontalAlignment="Left" Margin="529,280,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="fechadekra" HorizontalAlignment="Left" Margin="887,342,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnagregarcult" HorizontalAlignment="Left" Margin="122,343,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="146">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Cultivo" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnagregarmasc" HorizontalAlignment="Left" Margin="504,379,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="147">
+        <Button x:Name="btnagregarmasc" HorizontalAlignment="Left" Margin="456,381,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="147">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Mascotas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnagregarveh" HorizontalAlignment="Left" Margin="860,393,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="152">
+        <Button x:Name="btnagregarveh" HorizontalAlignment="Left" Margin="825,395,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="152">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Vehiculos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarcult" HorizontalAlignment="Left" Margin="146,385,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
+        <Button x:Name="btnmodificarcult" HorizontalAlignment="Left" Margin="122,397,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Cultivos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarmas" HorizontalAlignment="Left" Margin="504,435,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="44" Width="154">
+        <Button x:Name="btnmodificarmas" HorizontalAlignment="Left" Margin="456,437,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="44" Width="154">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Mascotas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarveh" HorizontalAlignment="Left" Margin="856,441,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="156">
+        <Button x:Name="btnmodificarveh" HorizontalAlignment="Left" Margin="821,443,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="156">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Vehiculos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarcult" HorizontalAlignment="Left" Margin="144,442,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
+        <Button x:Name="btneliminarcult" HorizontalAlignment="Left" Margin="120,454,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Cultivos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarmas" HorizontalAlignment="Left" Margin="507,485,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
+        <Button x:Name="btneliminarmas" HorizontalAlignment="Left" Margin="459,487,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Mascotas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarveh" HorizontalAlignment="Left" Margin="860,490,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
+        <Button x:Name="btneliminarveh" HorizontalAlignment="Left" Margin="825,492,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Vehiculos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>

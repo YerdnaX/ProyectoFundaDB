@@ -38,7 +38,7 @@
           Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
           RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
-          GridLinesVisibility="None" RowHeight="35">
+          GridLinesVisibility="None" RowHeight="35" SelectionChanged="dbcultivos_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -98,7 +98,7 @@
           Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
           RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
-          GridLinesVisibility="None" RowHeight="35">
+          GridLinesVisibility="None" RowHeight="35" SelectionChanged="dbmascotas_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -187,7 +187,7 @@
           Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
           RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
-          GridLinesVisibility="None" RowHeight="35" IsReadOnly="True">
+          GridLinesVisibility="None" RowHeight="35" IsReadOnly="True" SelectionChanged="dbvehiculo_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -294,55 +294,55 @@
         <TextBox x:Name="txtmarca" HorizontalAlignment="Left" Margin="887,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <DatePicker x:Name="fechamascota" HorizontalAlignment="Left" Margin="529,280,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="fechadekra" HorizontalAlignment="Left" Margin="887,342,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnagregarcult" HorizontalAlignment="Left" Margin="122,343,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="146">
+        <Button x:Name="btnagregarcult" HorizontalAlignment="Left" Margin="122,343,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="146" Click="btnagregarcult_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Cultivo" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnagregarmasc" HorizontalAlignment="Left" Margin="456,381,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="147">
+        <Button x:Name="btnagregarmasc" HorizontalAlignment="Left" Margin="456,381,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="147" Click="btnagregarmasc_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Mascotas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnagregarveh" HorizontalAlignment="Left" Margin="825,395,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="152">
+        <Button x:Name="btnagregarveh" HorizontalAlignment="Left" Margin="825,395,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="152" Click="btnagregarveh_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Vehiculos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarcult" HorizontalAlignment="Left" Margin="122,397,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
+        <Button x:Name="btnmodificarcult" HorizontalAlignment="Left" Margin="122,397,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148" Click="btnmodificarcult_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Cultivos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarmas" HorizontalAlignment="Left" Margin="456,437,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="44" Width="154">
+        <Button x:Name="btnmodificarmas" HorizontalAlignment="Left" Margin="456,437,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="44" Width="154" Click="btnmodificarmas_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Mascotas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarveh" HorizontalAlignment="Left" Margin="821,443,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="156">
+        <Button x:Name="btnmodificarveh" HorizontalAlignment="Left" Margin="821,443,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="156" Click="btnmodificarveh_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Vehiculos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarcult" HorizontalAlignment="Left" Margin="120,454,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
+        <Button x:Name="btneliminarcult" HorizontalAlignment="Left" Margin="120,454,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148" Click="btneliminarcult_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Cultivos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarmas" HorizontalAlignment="Left" Margin="459,487,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
+        <Button x:Name="btneliminarmas" HorizontalAlignment="Left" Margin="459,487,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148" Click="btneliminarmas_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Mascotas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarveh" HorizontalAlignment="Left" Margin="825,492,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148">
+        <Button x:Name="btneliminarveh" HorizontalAlignment="Left" Margin="825,492,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="148" Click="btneliminarveh_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Vehiculos" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>

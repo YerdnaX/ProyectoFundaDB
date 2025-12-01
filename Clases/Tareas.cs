@@ -14,8 +14,8 @@ namespace Clases
         string Descripcion;
         string prioridad;
         string estado;
-        DateTime fecha_creacion;
-        DateTime fecha_vencimiento;
+        DateOnly fecha_creacion;
+        DateOnly fecha_vencimiento;
         string repeticion;
         int ID_area;
 
@@ -25,8 +25,8 @@ namespace Clases
         public string Descripcion1 { get => Descripcion; set => Descripcion = value; }
         public string Prioridad { get => prioridad; set => prioridad = value; }
         public string Estado { get => estado; set => estado = value; }
-        public DateTime Fecha_creacion { get => fecha_creacion; set => fecha_creacion = value; }
-        public DateTime Fecha_vencimiento { get => fecha_vencimiento; set => fecha_vencimiento = value; }
+        public DateOnly Fecha_creacion { get => fecha_creacion; set => fecha_creacion = value; }
+        public DateOnly Fecha_vencimiento { get => fecha_vencimiento; set => fecha_vencimiento = value; }
         public string Repeticion { get => repeticion; set => repeticion = value; }
         public int ID_Area { get => ID_area; set => ID_area = value; }
 

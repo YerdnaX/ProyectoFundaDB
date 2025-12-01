@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Automation;
 
 namespace Clases
 {
@@ -37,7 +38,7 @@ namespace Clases
         DataSet dsTablas = new DataSet();
         SqlConnection _conexion;
 
-        string _StrConexion = @"Server=DESKTOP-HGJUI2M;Database=domus_hogar;Integrated Security=true;TrustServerCertificate=true;";
+        string _StrConexion = @"Server=localhost;Database=domus_hogar;Integrated Security=true;TrustServerCertificate=true;";
 
         public DataTable TablaMiembros { get => Miembros; set => Miembros = value; }
         public DataTable TablaAreas { get => Areas; set => Areas = value; }
@@ -526,7 +527,6 @@ namespace Clases
             }
 
         }
-
         public void InsertarCategoriasFinanzas(string nombre_categoria, string tipo)
         {
             SqlCommand _instruccionSQL;
@@ -551,7 +551,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void InsertarProveedores(string nombre_proveedor, string tipo)
         {
             SqlCommand _instruccionSQL;
@@ -576,7 +575,691 @@ namespace Clases
                 _conexion.Close();
             }
         }
+        public void InsertarCultivo(string nombre, string variedad)
+        {
+            SqlCommand _instruccionSQL;
+            string _insercion;
+            try
+            {
+                EstablecerConexion();
+                _insercion = "INSERT INTO cultivos (nombre, variedad)";
+                _insercion += "VALUES (@nombre, @variedad)";
+                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
+                _instruccionSQL.Parameters.AddWithValue("@variedad", variedad);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar el cultivo: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void InsertarMascota(string nombre, string especie, string raza, DateOnly fecha_nac, decimal peso)
+        {
+            SqlCommand _instruccionSQL;
+            string _insercion;
 
+            try 
+            {
+                EstablecerConexion();
+                _insercion = "INSERT INTO mascotas (nombre, especie, raza, fecha_nac, peso)";
+                _insercion += "VALUES (@nombre, @especie, @raza, @fecha_nac, @peso)";
+                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
+                _instruccionSQL.Parameters.AddWithValue("@especie", especie);
+                _instruccionSQL.Parameters.AddWithValue("@raza", raza ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@fecha_nac", fecha_nac);
+                _instruccionSQL.Parameters.AddWithValue("@peso", peso);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar la mascota: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+
+        }
+        public void InsertarVehiculo(string placa, string marca, string modelo, int year, string poliza, DateOnly dekra)
+        {
+            SqlCommand _instruccionSQL;
+            string _insercion;
+            try
+            {
+                EstablecerConexion();
+                _insercion = "INSERT INTO vehiculos (placa, marca, modelo, year, poliza, dekra)";
+                _insercion += "VALUES (@placa, @marca, @modelo, @year, @poliza, @dekra)";
+                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@placa", placa);
+                _instruccionSQL.Parameters.AddWithValue("@marca", marca);
+                _instruccionSQL.Parameters.AddWithValue("@modelo", modelo);
+                _instruccionSQL.Parameters.AddWithValue("@year", year);
+                _instruccionSQL.Parameters.AddWithValue("@poliza", poliza ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@dekra", dekra);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar el vehiculo: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void InsertarLista(string nombre, string tipo, int? id_area, int? creada_por, DateOnly fecha_creada)
+        {
+            SqlCommand _instruccionSQL;
+            string _insercion;
+
+            try
+            {
+                EstablecerConexion();
+                _insercion = "INSERT INTO listas (nombre, tipo, id_area, creada_por, fecha_creada) VALUES (@nombre, @tipo, @id_area, @creada_por, @fecha_creada)";
+                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
+                _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
+                _instruccionSQL.Parameters.AddWithValue("@id_area", id_area ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@creada_por", creada_por ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@fecha_creada", fecha_creada.ToDateTime(TimeOnly.MinValue));
+
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar lista: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void InsertarTarea(int id_lista, string titulo, string descripcion, string prioridad, string estado, DateOnly fecha_creacion, DateOnly? fecha_limite, string repeticion, int? id_area)
+        {
+            SqlCommand _instruccionSQL;
+            string _insercion;
+
+            try
+            {
+                EstablecerConexion();
+                _insercion = "INSERT INTO tareas (id_lista, titulo, descripcion, prioridad, estado, fecha_creacion, fecha_limite, repeticion, id_area) VALUES (@id_lista, @titulo, @descripcion, @prioridad, @estado, @fecha_creacion, @fecha_limite, @repeticion, @id_area)";
+                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+
+                _instruccionSQL.Parameters.AddWithValue("@id_lista", id_lista);
+                _instruccionSQL.Parameters.AddWithValue("@titulo", titulo);
+                _instruccionSQL.Parameters.AddWithValue("@descripcion", descripcion ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@prioridad", prioridad);
+                _instruccionSQL.Parameters.AddWithValue("@estado", estado);
+                _instruccionSQL.Parameters.AddWithValue("@fecha_creacion", fecha_creacion.ToDateTime(TimeOnly.MinValue));
+                _instruccionSQL.Parameters.AddWithValue("@fecha_limite", fecha_limite?.ToDateTime(TimeOnly.MinValue) ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@repeticion", repeticion);
+                _instruccionSQL.Parameters.AddWithValue("@id_area", id_area ?? (object)DBNull.Value);
+
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar tarea: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void InsetarAsginarTarea(int idTarea, int idMiembro) {
+        
+            SqlCommand _instruccionSQL;
+            string _insercion;
+            try
+            {
+                EstablecerConexion();
+                _insercion = "INSERT INTO tareas_asignaciones (id_tarea, id_miembro) VALUES (@id_tarea, @id_miembro)";
+                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL.Parameters.AddWithValue("@id_tarea", idTarea);
+                _instruccionSQL.Parameters.AddWithValue("@id_miembro", idMiembro);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al asignar tarea: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void InsertarEvento(string tipo, string titulo, DateTime fecha, string lugar, string notas, int idMiembro) { 
+        
+            SqlCommand _instruccionSQL;
+            string _insercion;
+            try
+            {
+                EstablecerConexion();
+                _insercion = "INSERT INTO eventos (tipo, titulo, fecha, lugar, notas, creado_por) VALUES (@tipo, @titulo, @fecha, @lugar, @notas, @id_miembro)";
+                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
+                _instruccionSQL.Parameters.AddWithValue("@titulo", titulo);
+                _instruccionSQL.Parameters.AddWithValue("@fecha", fecha);
+                _instruccionSQL.Parameters.AddWithValue("@lugar", lugar ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@notas", notas ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@id_miembro", idMiembro);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar evento: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        
+        //ACTUALIZAR DATOS EN LA BASE DE DATOS
+
+        public void ActualizarArea(int id_area, string nombre_area, string detalle)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE areas SET nombre = @nombre, detalle = @detalle ";
+                _actualizacion += "WHERE id_area = @id_area";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_area", id_area);
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_area);
+                _instruccionSQL.Parameters.AddWithValue("@detalle", detalle);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el area: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        } 
+        public void ActualizarCategoriaFinanzas(int id_categoria, string nombre_categoria,  string tipo)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE categorias_finanzas SET nombre = @nombre, tipo = @tipo ";
+                _actualizacion += "WHERE id_categoria = @id_categoria";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_categoria", id_categoria);
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_categoria);
+                _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la categoria de finanzas: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void ActualizarProveedor(int id_proveedor, string nombre_proveedor, string tipo)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE proveedores SET nombre = @nombre, tipo = @tipo ";
+                _actualizacion += "WHERE id_proveedor = @id_proveedor";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_proveedor", id_proveedor);
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_proveedor);
+                _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el proveedor: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void ActualizarCultivo(int id_cultivo, string nombre, string variedad)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE cultivos SET nombre = @nombre, variedad = @variedad ";
+                _actualizacion += "WHERE id_cultivo = @id_cultivo";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_cultivo", id_cultivo);
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
+                _instruccionSQL.Parameters.AddWithValue("@variedad", variedad);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el cultivo: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void ActualizarMascota(int id_mascota, string nombre, string especie, string raza, DateOnly fecha_nac, decimal peso)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE mascotas SET nombre = @nombre, especie = @especie, raza = @raza, fecha_nac = @fecha_nac, peso = @peso ";
+                _actualizacion += "WHERE id_mascota = @id_mascota";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_mascota", id_mascota);
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
+                _instruccionSQL.Parameters.AddWithValue("@especie", especie);
+                _instruccionSQL.Parameters.AddWithValue("@raza", raza ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@fecha_nac", fecha_nac);
+                _instruccionSQL.Parameters.AddWithValue("@peso", peso);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la mascota: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void ActualizarVehiculo(int id_vehiculo, string placa, string marca, string modelo, int year, string poliza, DateOnly dekra)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE vehiculos SET placa = @placa, marca = @marca, modelo = @modelo, year = @year, poliza = @poliza, dekra = @dekra ";
+                _actualizacion += "WHERE id_vehiculo = @id_vehiculo";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_vehiculo", id_vehiculo);
+                _instruccionSQL.Parameters.AddWithValue("@placa", placa);
+                _instruccionSQL.Parameters.AddWithValue("@marca", marca);
+                _instruccionSQL.Parameters.AddWithValue("@modelo", modelo);
+                _instruccionSQL.Parameters.AddWithValue("@year", year);
+                _instruccionSQL.Parameters.AddWithValue("@poliza", poliza ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@dekra", dekra);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el vehiculo: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void ActualizarLista(int id_lista, string nombre, string tipo, int? id_area, int? creada_por, DateOnly fecha_creada)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE listas SET nombre = @nombre, tipo = @tipo, id_area = @id_area, creada_por = @creada_por, fecha_creada = @fecha_creada ";
+                _actualizacion += "WHERE id_lista = @id_lista";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL.Parameters.AddWithValue("@id_lista", id_lista);
+                _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
+                _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
+                _instruccionSQL.Parameters.AddWithValue("@id_area", id_area ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@creada_por", creada_por ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@fecha_creada", fecha_creada.ToDateTime(TimeOnly.MinValue));
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la lista: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void ActualizarTarea(int id_tarea, int nuevo_id_lista, string nuevo_titulo, string nueva_descripcion, string nueva_prioridad, string nuevo_estado, DateOnly nueva_fecha_creacion, DateOnly? nueva_fecha_limite, string nueva_repeticion, int? nuevo_id_area)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE tareas SET id_lista = @id_lista, titulo = @titulo, descripcion = @descripcion, prioridad = @prioridad, estado = @estado, fecha_creacion = @fecha_creacion, fecha_limite = @fecha_limite, repeticion = @repeticion, id_area = @id_area WHERE id_tarea = @id";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+
+                _instruccionSQL.Parameters.AddWithValue("@id_lista", nuevo_id_lista);
+                _instruccionSQL.Parameters.AddWithValue("@titulo", nuevo_titulo);
+                _instruccionSQL.Parameters.AddWithValue("@descripcion", nueva_descripcion ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@prioridad", nueva_prioridad);
+                _instruccionSQL.Parameters.AddWithValue("@estado", nuevo_estado);
+                _instruccionSQL.Parameters.AddWithValue("@fecha_creacion", nueva_fecha_creacion.ToDateTime(TimeOnly.MinValue));
+                _instruccionSQL.Parameters.AddWithValue("@fecha_limite", nueva_fecha_limite?.ToDateTime(TimeOnly.MinValue) ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@repeticion", nueva_repeticion);
+                _instruccionSQL.Parameters.AddWithValue("@id_area", nuevo_id_area ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@id", id_tarea);
+
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar tarea: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void ActualizarAsignarTarea(int idTarea, int nuevoMiembro) {
+        
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE tareas_asignaciones SET id_miembro = @id_miembro WHERE id_tarea = @id_tarea";
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_tarea", idTarea);
+                _instruccionSQL.Parameters.AddWithValue("@id_miembro", nuevoMiembro);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la asignacion de tarea: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void ActualizarEvento(int id_evento, string tipo, string titulo, DateTime fecha, string lugar, string notas, int idMiembro)
+        {
+            SqlCommand _instruccionSQL;
+            string _actualizacion;
+            try
+            {
+                EstablecerConexion();
+                _actualizacion = "UPDATE eventos SET tipo = @tipo, titulo = @titulo, fecha_hora = @fecha, lugar = @lugar, notas = @notas, id_miembro = @id_miembro ";
+                _actualizacion += "WHERE id_evento = @id_evento";   
+                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_evento", id_evento);
+                _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
+                _instruccionSQL.Parameters.AddWithValue("@titulo", titulo);
+                _instruccionSQL.Parameters.AddWithValue("@fecha", fecha);
+                _instruccionSQL.Parameters.AddWithValue("@lugar", lugar ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@notas", notas ?? (object)DBNull.Value);
+                _instruccionSQL.Parameters.AddWithValue("@id_miembro", idMiembro > 0 ? (object)idMiembro : DBNull.Value);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el evento: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+       
+        //ELIMINAR DATOS DE LA BASE DE DATOS
+        public void EliminarArea(int id_area)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM areas WHERE id_area = @id_area";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_area", id_area);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el area: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarCategoriaFinanzas(int id_categoria)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM categorias_finanzas WHERE id_categoria = @id_categoria";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_categoria", id_categoria);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la categoria de finanzas: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarProveedor(int id_proveedor)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM proveedores WHERE id_proveedor = @id_proveedor";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_proveedor", id_proveedor);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el proveedor: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarCultivo(int id_cultivo)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM cultivos WHERE id_cultivo = @id_cultivo";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_cultivo", id_cultivo);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el cultivo: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarMascota(int id_mascota)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM mascotas WHERE id_mascota = @id_mascota";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_mascota", id_mascota);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la mascota: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarVehiculo(int id_vehiculo)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM vehiculos WHERE id_vehiculo = @id_vehiculo";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_vehiculo", id_vehiculo);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el vehiculo: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarLista(int id_lista)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM listas WHERE id_lista = @id_lista";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_lista", id_lista);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la lista: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarTarea(int id_tarea)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM tareas WHERE id_tarea = @id_tarea";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_tarea", id_tarea);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la tarea: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarAsignarTarea(int id_tarea, int idMiembro)
+        {
+            
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM tareas_asignaciones WHERE id_tarea = @id_tarea AND id_miembro = @id_miembro";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_tarea", id_tarea);
+                _instruccionSQL.Parameters.AddWithValue("@id_miembro", idMiembro);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la asignacion de tarea: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
+        public void EliminarEvento(int id_evento)
+        {
+            SqlCommand _instruccionSQL;
+            string _eliminacion;
+            try
+            {
+                EstablecerConexion();
+                _eliminacion = "DELETE FROM eventos WHERE id_evento = @id_evento";
+                _instruccionSQL = new SqlCommand(_eliminacion, _conexion);
+                //PARAMETROS
+                _instruccionSQL.Parameters.AddWithValue("@id_evento", id_evento);
+                _instruccionSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el evento: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
         //MOSTRAR DATOS DE LA BASE DE DATOS 
 
         public void MostrarAreas()
@@ -1335,7 +2018,39 @@ namespace Clases
             }
 
         }
- 
+
+        //OBTENER LOS ID DESDE LAS VISTAS
+        public int ObtenerIDEventoDesdeVista(string titulo, DateTime fecha, string tipo)
+        {
+            try
+            {
+                EstablecerConexion();
+                string query = "SELECT id_evento FROM eventos WHERE titulo = @titulo AND fecha_hora = @fecha AND tipo = @tipo";
+
+                SqlCommand cmd = new SqlCommand(query, _conexion);
+                cmd.Parameters.AddWithValue("@titulo", titulo);
+                cmd.Parameters.AddWithValue("@fecha", fecha);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    throw new Exception("No se encontró el ID del evento");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener ID del evento: " + ex.Message);
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+        }
 
         //MOSTRAR LAS VISTAS DEL SQL
 
@@ -1382,7 +2097,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarResumenFinanciera()
         {
             SqlCommand sql_instruccion;
@@ -1424,7 +2138,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarTareasPendientes()
         {
             SqlCommand sql_instruccion;
@@ -1469,7 +2182,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarFacturasAVencer()
         {
             SqlCommand sql_instruccion;
@@ -1513,7 +2225,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarTotalFacturasPagar()
         {
             SqlCommand sql_instruccion;
@@ -1553,7 +2264,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarManteVehiculo()
         {
             SqlCommand sql_instruccion;
@@ -1600,7 +2310,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarResumenManteVehiculo()
         {
             SqlCommand sql_instruccion;
@@ -1646,7 +2355,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarSaludMascota()
         {
             SqlCommand sql_instruccion;
@@ -1692,7 +2400,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarMedicamentosActivos()
         {
             SqlCommand sql_instruccion;
@@ -1737,7 +2444,6 @@ namespace Clases
                 _conexion.Close();
             }
         }
-
         public void MostrarGastosVeterinaria()
         {
             SqlCommand sql_instruccion;

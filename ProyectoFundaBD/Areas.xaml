@@ -45,7 +45,7 @@
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
           GridLinesVisibility="None" CanUserAddRows="False"
           HorizontalGridLinesBrush="Transparent" VerticalGridLinesBrush="Transparent"
-          RowHeight="35" SelectionUnit="FullRow" Height="168" VerticalAlignment="Top" IsReadOnly="True">
+          RowHeight="35" SelectionUnit="FullRow" Height="168" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="dbares_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -109,7 +109,7 @@
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
           GridLinesVisibility="None" CanUserAddRows="False"
           HorizontalGridLinesBrush="Transparent" VerticalGridLinesBrush="Transparent"
-          RowHeight="35" SelectionUnit="FullRow" Height="168" VerticalAlignment="Top" IsReadOnly="True">
+          RowHeight="35" SelectionUnit="FullRow" Height="168" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="dbfinanzas_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -173,7 +173,7 @@
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
           GridLinesVisibility="None" CanUserAddRows="False"
           HorizontalGridLinesBrush="Transparent" VerticalGridLinesBrush="Transparent"
-          RowHeight="35" SelectionUnit="FullRow" Height="168" VerticalAlignment="Top" IsReadOnly="True">
+          RowHeight="35" SelectionUnit="FullRow" Height="168" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="dbproveedores_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -237,13 +237,13 @@
                 <TextBlock Text="Agregar Area" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnfinanzas" HorizontalAlignment="Left" Margin="432,248,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="44" Width="143">
+        <Button x:Name="btnfinanzas" HorizontalAlignment="Left" Margin="432,248,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="44" Width="143" Click="btnfinanzas_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Finanzas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnproveedor"  HorizontalAlignment="Left" Margin="780,249,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="45" Width="174">
+        <Button x:Name="btnproveedor"  HorizontalAlignment="Left" Margin="780,249,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="45" Width="174" Click="btnproveedor_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Proveedores" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
@@ -261,25 +261,25 @@
                 <TextBlock Text="Modificar Area" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarfi" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="150" Margin="0,297,0,0">
+        <Button x:Name="btneliminarfi" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="150" Margin="0,297,0,0" Click="btneliminarfi_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Finanzas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarfi" HorizontalAlignment="Left" Margin="588,249,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="151">
+        <Button x:Name="btnmodificarfi" HorizontalAlignment="Left" Margin="588,249,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="151" Click="btnmodificarfi_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Finanzas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarpro" HorizontalAlignment="Left" Margin="870,299,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="178">
+        <Button x:Name="btneliminarpro" HorizontalAlignment="Left" Margin="870,299,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="178" Click="btneliminarpro_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Proveedores" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarPro" HorizontalAlignment="Left" Margin="969,251,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="170">
+        <Button x:Name="btnmodificarPro" HorizontalAlignment="Left" Margin="969,251,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="170" Click="btnmodificarPro_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Proveedores" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>

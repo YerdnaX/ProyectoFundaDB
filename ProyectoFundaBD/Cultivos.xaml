@@ -48,7 +48,7 @@
           Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
           RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
-          GridLinesVisibility="None" RowHeight="35">
+          GridLinesVisibility="None" RowHeight="35" SelectionChanged="dbsiembra_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -138,7 +138,7 @@
           Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
           RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
-          GridLinesVisibility="None" RowHeight="35">
+          GridLinesVisibility="None" RowHeight="35" SelectionChanged="dbtratamiento_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -228,7 +228,7 @@
           Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
           RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
-          GridLinesVisibility="None" RowHeight="35">
+          GridLinesVisibility="None" RowHeight="35" SelectionChanged="dbinventario_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -333,55 +333,55 @@
             <ComboBoxItem Content="SEMILLA"/>
             <ComboBoxItem Content="OTRO"/>
         </ComboBox>
-        <Button x:Name="btnagregarsiem" HorizontalAlignment="Left" Margin="131,367,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="146">
+        <Button x:Name="btnagregarsiem" HorizontalAlignment="Left" Margin="131,367,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="146" Click="btnagregarsiem_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Siembra" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarsiem" HorizontalAlignment="Left" Margin="53,410,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="151">
+        <Button x:Name="btnmodificarsiem" HorizontalAlignment="Left" Margin="53,410,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="151" Click="btnmodificarsiem_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Siembra" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarsiem" HorizontalAlignment="Left" Margin="228,410,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="142">
+        <Button x:Name="btneliminarsiem" HorizontalAlignment="Left" Margin="228,410,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="142" Click="btneliminarsiem_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Siembra" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnagregartrat" HorizontalAlignment="Left" Margin="513,367,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="180">
+        <Button x:Name="btnagregartrat" HorizontalAlignment="Left" Margin="513,367,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="180" Click="btnagregartrat_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Tratamiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificartrat" HorizontalAlignment="Left" Margin="418,410,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="176">
+        <Button x:Name="btnmodificartrat" HorizontalAlignment="Left" Margin="418,410,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="176" Click="btnmodificartrat_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Tratamiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminartrat" HorizontalAlignment="Left" Margin="603,410,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="173">
+        <Button x:Name="btneliminartrat" HorizontalAlignment="Left" Margin="603,410,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="173" Click="btneliminartrat_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Tratamiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnagregarinv" HorizontalAlignment="Left" Margin="891,369,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="168">
+        <Button x:Name="btnagregarinv" HorizontalAlignment="Left" Margin="891,369,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="168" Click="btnagregarinv_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Inventario" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificarinv" HorizontalAlignment="Left" Margin="813,412,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="162">
+        <Button x:Name="btnmodificarinv" HorizontalAlignment="Left" Margin="813,412,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="162" Click="btnmodificarinv_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Inventario" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminarinv" HorizontalAlignment="Left" Margin="988,412,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="159">
+        <Button x:Name="btneliminarinv" HorizontalAlignment="Left" Margin="988,412,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="43" Width="159" Click="btneliminarinv_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Inventario" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>

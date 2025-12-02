@@ -94,20 +94,12 @@ namespace ProyectoFundaBD
 
                 if (bd.TablaMovimiento != null && bd.TablaMovimiento.Rows.Count > 0)
                 {
-
-                    foreach (DataRow row in bd.TablaMovimiento.Rows)
-                    {
-                        Console.WriteLine($"tipo: {row["tipo"]}, monto: {row["monto"]}");
-                    }
-
                     dbmovimiento.ItemsSource = bd.TablaMovimiento.DefaultView;
-
-                    // Forzar actualizacion de la UI
                     dbmovimiento.Items.Refresh();
                 }
                 else
                 {
-                    MessageBox.Show("No se encontraron registros en la tabla de movimientos");
+                    MessageBox.Show("No hay movimientos registrados");
                 }
             }
             catch (Exception ex)
@@ -130,7 +122,7 @@ namespace ProyectoFundaBD
                 }
                 else
                 {
-                    MessageBox.Show("No hay resumen financiero");
+                    
                 }
             }
             catch (Exception ex)
@@ -146,6 +138,263 @@ namespace ProyectoFundaBD
             menuPrincipal.Show();
 
 
+        }
+
+        private void dbmovimiento_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (dbmovimiento.SelectedItem == null)
+                return;
+
+            try
+            {
+                DataRowView filaSeleccionada = (DataRowView)dbmovimiento.SelectedItem;
+
+                if (DateTime.TryParse(filaSeleccionada["fecha"].ToString(), out DateTime fechaMov))
+                {
+                    fecha.SelectedDate = fechaMov;
+                }
+
+                string tipo = filaSeleccionada["tipo"].ToString();
+                foreach (ComboBoxItem item in boxtipo.Items)
+                {
+                    if (item.Content.ToString() == tipo)
+                    {
+                        boxtipo.SelectedItem = item;
+                        break;
+                    }
+                }
+
+                string nombreCategoria = filaSeleccionada["nombre"].ToString();
+                foreach (Categorias_Finanzas categoria in boxcategoria.Items)
+                {
+                    if (categoria.Nombre_categoria == nombreCategoria)
+                    {
+                        boxcategoria.SelectedValue = categoria.ID_categoria;
+                        break;
+                    }
+                }
+
+ 
+                if (decimal.TryParse(filaSeleccionada["monto"].ToString(), out decimal monto))
+                {
+                    txtmonto.Text = monto.ToString("F2");
+                }
+
+                txtreferencia.Text = filaSeleccionada["referencia"]?.ToString() ?? "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar datos: {ex.Message}");
+            }
+
+
+        }
+
+        private void btnagregar_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Permisos.PuedeAgregar(miembroActual.Rol))
+            {
+                MessageBox.Show("No tienes permisos para agregar movimientos.", "Permiso denegado",
+                              MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                // Validaciones
+                if (fecha.SelectedDate == null)
+                {
+                    MessageBox.Show("Por favor selecciona una fecha");
+                    return;
+                }
+
+                if (boxtipo.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor selecciona un tipo");
+                    return;
+                }
+
+                if (boxcategoria.SelectedValue == null)
+                {
+                    MessageBox.Show("Por favor selecciona una categoria");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtmonto.Text) ||
+                    !decimal.TryParse(txtmonto.Text, out decimal monto))
+                {
+                    MessageBox.Show("Por favor ingresa un monto valido");
+                    return;
+                }
+
+                // Obtener valores
+                DateTime fechaMov = fecha.SelectedDate.Value;
+                string tipo = ((ComboBoxItem)boxtipo.SelectedItem).Content.ToString();
+                int idCategoria = (int)boxcategoria.SelectedValue;
+                string referencia = txtreferencia.Text.Trim();
+
+                // Insertar movimiento
+                bd.InsertarMovimiento(fechaMov, tipo, idCategoria, monto, referencia);
+
+                MessageBox.Show("Movimiento agregado correctamente", "Exito",
+                              MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Recargar y limpiar
+                CargarMovimientos();
+                CargarResumenFinanciero();
+                LimpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al agregar movimiento: {ex.Message}");
+            }
+
+        }
+
+        private void btnmodificar_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (!Permisos.PuedeEditar(miembroActual.Rol))
+            {
+                MessageBox.Show("No tienes permisos para modificar movimientos.", "Permiso denegado",
+                              MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (dbmovimiento.SelectedItem == null)
+            {
+                MessageBox.Show("Por favor selecciona un movimiento para modificar");
+                return;
+            }
+
+            try
+            {
+                DataRowView filaSeleccionada = (DataRowView)dbmovimiento.SelectedItem;
+
+                int idMovimiento = (int)filaSeleccionada["id_movimiento"];
+
+                if (fecha.SelectedDate == null)
+                {
+                    MessageBox.Show("Por favor selecciona una fecha");
+                    return;
+                }
+
+                if (boxtipo.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor selecciona un tipo");
+                    return;
+                }
+
+                if (boxcategoria.SelectedValue == null)
+                {
+                    MessageBox.Show("Por favor selecciona una categoria");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtmonto.Text) ||
+                    !decimal.TryParse(txtmonto.Text, out decimal monto))
+                {
+                    MessageBox.Show("Por favor ingresa un monto valido");
+                    return;
+                }
+
+                DateTime nuevaFecha = fecha.SelectedDate.Value;
+                string nuevoTipo = ((ComboBoxItem)boxtipo.SelectedItem).Content.ToString();
+                int nuevaCategoriaId = (int)boxcategoria.SelectedValue;
+                string nuevaReferencia = txtreferencia.Text.Trim();
+
+
+                DateTime fechaOriginal = Convert.ToDateTime(filaSeleccionada["fecha"]);
+                string tipoOriginal = filaSeleccionada["tipo"].ToString();
+                decimal montoOriginal = Convert.ToDecimal(filaSeleccionada["monto"]);
+
+                MessageBoxResult resultado = MessageBox.Show(
+                    $"Quieres modificar el movimiento del {fechaOriginal:dd/MM/yyyy} - {tipoOriginal} por {montoOriginal:F2}?",
+                    "Confirmar modificacion",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    // Actualizar movimiento
+                    bd.ActualizarMovimiento(idMovimiento, nuevaFecha, nuevoTipo, nuevaCategoriaId, monto, nuevaReferencia);
+
+                    MessageBox.Show("Movimiento modificado correctamente", "Exito",
+                                  MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Recargar y limpiar
+                    CargarMovimientos();
+                    CargarResumenFinanciero();
+                    LimpiarCampos();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al modificar movimiento: {ex.Message}");
+            }
+
+        }
+
+        private void btneliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Permisos.PuedeEliminar(miembroActual.Rol))
+            {
+                MessageBox.Show("No tienes permisos para eliminar movimientos.", "Permiso denegado",
+                              MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (dbmovimiento.SelectedItem == null)
+            {
+                MessageBox.Show("Por favor selecciona un movimiento para eliminar");
+                return;
+            }
+
+            try
+            {
+                DataRowView filaSeleccionada = (DataRowView)dbmovimiento.SelectedItem;
+
+
+                int idMovimiento = (int)filaSeleccionada["id_movimiento"];
+                DateTime fechaMov = Convert.ToDateTime(filaSeleccionada["fecha"]);
+                string tipo = filaSeleccionada["tipo"].ToString();
+                decimal monto = Convert.ToDecimal(filaSeleccionada["monto"]);
+
+                MessageBoxResult resultado = MessageBox.Show(
+                    $"Quieres eliminar el movimiento del {fechaMov:dd/MM/yyyy} - {tipo} por {monto:F2}?",
+                    "Confirmar eliminacion",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    // Eliminar movimiento
+                    bd.EliminarMovimiento(idMovimiento);
+
+                    MessageBox.Show("Movimiento eliminado correctamente", "Exito",
+                                  MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Recargar y limpiar
+                    CargarMovimientos();
+                    CargarResumenFinanciero();
+                    LimpiarCampos();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al eliminar movimiento: {ex.Message}");
+            }
+        }
+
+        private void LimpiarCampos()
+        {
+            fecha.SelectedDate = null;
+            boxtipo.SelectedIndex = -1;
+            boxcategoria.SelectedIndex = -1;
+            txtmonto.Clear();
+            txtreferencia.Clear();
+            dbmovimiento.SelectedItem = null;
         }
     }
 }

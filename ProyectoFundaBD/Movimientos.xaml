@@ -40,7 +40,7 @@
           Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
           RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
           FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
-          GridLinesVisibility="None" RowHeight="35">
+          GridLinesVisibility="None" RowHeight="35" SelectionChanged="dbmovimiento_SelectionChanged">
 
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -130,19 +130,19 @@
         <TextBox x:Name="txtreferencia" HorizontalAlignment="Left" Margin="263,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
         <TextBox x:Name="txtmonto" HorizontalAlignment="Left" Margin="263,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
         <DatePicker x:Name="fecha" HorizontalAlignment="Left" Margin="258,112,0,0" VerticalAlignment="Top" Width="148"/>
-        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="107,384,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="161">
+        <Button x:Name="btnagregar" HorizontalAlignment="Left" Margin="107,384,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="161" Click="btnagregar_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/anadir.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Agregar Movimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="312,384,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="166">
+        <Button x:Name="btnmodificar" HorizontalAlignment="Left" Margin="312,384,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="166" Click="btnmodificar_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/editar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Modificar Movimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btneliminar" HorizontalAlignment="Left" Margin="209,439,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="165">
+        <Button x:Name="btneliminar" HorizontalAlignment="Left" Margin="209,439,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Height="50" Width="165" Click="btneliminar_Click">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="/Imagenes/borrar.png" Width="16" Height="16" Margin="0,0,5,0"/>
                 <TextBlock Text="Eliminar Movimiento" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>

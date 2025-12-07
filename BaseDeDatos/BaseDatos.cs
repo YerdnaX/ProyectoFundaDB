@@ -439,12 +439,10 @@ namespace Clases
         {
             using (SqlConnection connection = new SqlConnection(_StrConexion))
             {
-                string query = @"
-                DELETE FROM AsignacionesBotones WHERE NumeroBoton = @NumeroBoton;
-                INSERT INTO AsignacionesBotones (NumeroBoton, IdMiembro, RutaImagen, NombreImagen) 
-                VALUES (@NumeroBoton, @IdMiembro, @RutaImagen, @NombreImagen)";
-
-                SqlCommand command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand("spGuardarAsignacionBoton", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 command.Parameters.AddWithValue("@IdMiembro", idMiembro);
                 command.Parameters.AddWithValue("@NumeroBoton", numeroBoton);
                 command.Parameters.AddWithValue("@RutaImagen", rutaImagen);
@@ -498,16 +496,15 @@ namespace Clases
         {
 
             SqlCommand _instruccionSQL;
-            string _insercion;
 
             try
             {
                 EstablecerConexion();
 
-                _insercion = "INSERT INTO areas (nombre, detalle)";
-                _insercion += "VALUES (@nombre, @detalle)";
-
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarArea", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_area);
@@ -530,13 +527,13 @@ namespace Clases
         public void InsertarCategoriasFinanzas(string nombre_categoria, string tipo)
         {
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO categorias_finanzas (nombre, tipo)";
-                _insercion += "VALUES (@nombre, @tipo)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarCategoriaFinanzas", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_categoria);
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
@@ -554,13 +551,13 @@ namespace Clases
         public void InsertarProveedores(string nombre_proveedor, string tipo)
         {
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO proveedores (nombre, tipo)";
-                _insercion += "VALUES (@nombre, @tipo)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarProveedor", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_proveedor);
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
@@ -578,13 +575,13 @@ namespace Clases
         public void InsertarCultivo(string nombre, string variedad)
         {
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO cultivos (nombre, variedad)";
-                _insercion += "VALUES (@nombre, @variedad)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarCultivo", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
                 _instruccionSQL.Parameters.AddWithValue("@variedad", variedad);
@@ -602,14 +599,14 @@ namespace Clases
         public void InsertarMascota(string nombre, string especie, string raza, DateOnly fecha_nac, decimal peso)
         {
             SqlCommand _instruccionSQL;
-            string _insercion;
 
             try 
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO mascotas (nombre, especie, raza, fecha_nac, peso)";
-                _insercion += "VALUES (@nombre, @especie, @raza, @fecha_nac, @peso)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarMascota", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
                 _instruccionSQL.Parameters.AddWithValue("@especie", especie);
@@ -631,13 +628,13 @@ namespace Clases
         public void InsertarVehiculo(string placa, string marca, string modelo, int year, string poliza, DateOnly dekra)
         {
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO vehiculos (placa, marca, modelo, year, poliza, dekra)";
-                _insercion += "VALUES (@placa, @marca, @modelo, @year, @poliza, @dekra)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarVehiculo", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@placa", placa);
                 _instruccionSQL.Parameters.AddWithValue("@marca", marca);
@@ -659,13 +656,14 @@ namespace Clases
         public void InsertarLista(string nombre, string tipo, int? id_area, int? creada_por, DateOnly fecha_creada)
         {
             SqlCommand _instruccionSQL;
-            string _insercion;
 
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO listas (nombre, tipo, id_area, creada_por, fecha_creada) VALUES (@nombre, @tipo, @id_area, @creada_por, @fecha_creada)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarLista", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
@@ -687,13 +685,14 @@ namespace Clases
         public void InsertarTarea(int id_lista, string titulo, string descripcion, string prioridad, string estado, DateOnly fecha_creacion, DateOnly? fecha_limite, string repeticion, int? id_area)
         {
             SqlCommand _instruccionSQL;
-            string _insercion;
 
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO tareas (id_lista, titulo, descripcion, prioridad, estado, fecha_creacion, fecha_limite, repeticion, id_area) VALUES (@id_lista, @titulo, @descripcion, @prioridad, @estado, @fecha_creacion, @fecha_limite, @repeticion, @id_area)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarTarea", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
                 _instruccionSQL.Parameters.AddWithValue("@id_lista", id_lista);
                 _instruccionSQL.Parameters.AddWithValue("@titulo", titulo);
@@ -719,12 +718,13 @@ namespace Clases
         public void InsetarAsginarTarea(int idTarea, int idMiembro) {
         
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO tareas_asignaciones (id_tarea, id_miembro) VALUES (@id_tarea, @id_miembro)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarAsignacionTarea", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@id_tarea", idTarea);
                 _instruccionSQL.Parameters.AddWithValue("@id_miembro", idMiembro);
                 _instruccionSQL.ExecuteNonQuery();
@@ -741,12 +741,13 @@ namespace Clases
         public void InsertarEvento(string tipo, string titulo, DateTime fecha, string lugar, string notas, int idMiembro) { 
         
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO eventos (tipo, titulo, fecha, lugar, notas, creado_por) VALUES (@tipo, @titulo, @fecha, @lugar, @notas, @id_miembro)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarEvento", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
                 _instruccionSQL.Parameters.AddWithValue("@titulo", titulo);
                 _instruccionSQL.Parameters.AddWithValue("@fecha", fecha);
@@ -767,12 +768,13 @@ namespace Clases
         public void InsertarFactura(int idProveedor, decimal monto, int idCategoria, DateTime fechaEmision, DateTime fechaVencimiento, string estado) { 
         
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO facturas (id_proveedor, monto, id_categoria, fecha_emision, fecha_vencimiento, estado) VALUES (@id_proveedor, @monto, @id_categoria, @fecha_emision, @fecha_vencimiento, @estado)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarFactura", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@id_proveedor", idProveedor);
                 _instruccionSQL.Parameters.AddWithValue("@monto", monto);
                 _instruccionSQL.Parameters.AddWithValue("@id_categoria", idCategoria);
@@ -793,13 +795,13 @@ namespace Clases
         public void InsertarPresupuesto(int anio, string mes, int idCategoria, decimal montoPlaneado, decimal montoEjecutado) {
 
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO presupuestos (anio, mes, id_categoria, monto_planeado, monto_ejecutado) " +
-                     "VALUES (@anio, @mes, @id_categoria, @monto_planeado, @monto_ejecutado)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarPresupuesto", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@anio", anio);
                 _instruccionSQL.Parameters.AddWithValue("@mes", mes);
                 _instruccionSQL.Parameters.AddWithValue("@id_categoria", idCategoria);
@@ -820,13 +822,13 @@ namespace Clases
         public void InsertarSalario(int idMiembro, decimal monto, string periodicidad, decimal deducciones, DateTime fechaInicio) { 
         
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO salarios (id_miembro, monto, periodicidad, deducciones, fecha_inicio) " +
-                     "VALUES (@id_miembro, @monto, @periodicidad, @deducciones, @fecha_inicio)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarSalario", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@id_miembro", idMiembro);
                 _instruccionSQL.Parameters.AddWithValue("@monto", monto);
                 _instruccionSQL.Parameters.AddWithValue("@periodicidad", periodicidad);
@@ -846,13 +848,13 @@ namespace Clases
         public void InsertarMovimiento(DateTime fecha, string tipo, int idCategoria, decimal monto, string referencia) { 
         
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO movimientos (fecha, tipo, id_categoria, monto, referencia) " +
-                     "VALUES (@fecha, @tipo, @id_categoria, @monto, @referencia)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarMovimiento", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@fecha", fecha);
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
                 _instruccionSQL.Parameters.AddWithValue("@id_categoria", idCategoria);
@@ -872,13 +874,13 @@ namespace Clases
         public void InsertarSiembra(int idCultivo, DateTime fechaSiembra, DateTime? fechaEstimada, string sector, string notas) { 
         
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO siembras (id_cultivo, fecha_siembra, fecha_estimada, sector, notas) " +
-                     "VALUES (@id_cultivo, @fecha_siembra, @fecha_estimada, @sector, @notas)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarSiembra", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@id_cultivo", idCultivo);
                 _instruccionSQL.Parameters.AddWithValue("@fecha_siembra", fechaSiembra);
                 _instruccionSQL.Parameters.AddWithValue("@fecha_estimada", fechaEstimada ?? (object)DBNull.Value);
@@ -898,13 +900,13 @@ namespace Clases
         public void InsertarTratamiento(int idSiembra, DateTime fecha, string producto, string dosis, string notas) { 
         
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO tratamientos (id_siembra, fecha, producto, dosis, notas) " +
-                     "VALUES (@id_siembra, @fecha, @producto, @dosis, @notas)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarTratamiento", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@id_siembra", idSiembra);
                 _instruccionSQL.Parameters.AddWithValue("@fecha", fecha);
                 _instruccionSQL.Parameters.AddWithValue("@producto", producto);
@@ -924,13 +926,13 @@ namespace Clases
         public void InsertarInventario(string nombre, string tipo, decimal cantidad, string unidad) { 
         
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO inventario_jardin (nombre, tipo, cantidad, unidad) " +
-                     "VALUES (@nombre, @tipo, @cantidad, @unidad)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarInventarioJardin", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
                 _instruccionSQL.Parameters.AddWithValue("@cantidad", cantidad);
@@ -949,13 +951,13 @@ namespace Clases
         public void InsertarMantenimientoVehiculo(int idVehiculo, string tipo, string concepto,DateTime fecha, int? kilometraje, decimal costo,string taller, string notas)
         {
             SqlCommand _instruccionSQL;
-            string _insercion;
             try
             {
                 EstablecerConexion();
-                _insercion = "INSERT INTO vehiculos_mantenimientos (id_vehiculo, tipo, concepto, fecha, kilometraje, costo, taller, notas) " +
-                     "VALUES (@id_vehiculo, @tipo, @concepto, @fecha, @kilometraje, @costo, @taller, @notas)";
-                _instruccionSQL = new SqlCommand(_insercion, _conexion);
+                _instruccionSQL = new SqlCommand("spInsertarMantenimientoVehiculo", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@id_vehiculo", idVehiculo);
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
                 _instruccionSQL.Parameters.AddWithValue("@concepto", concepto);
@@ -981,13 +983,13 @@ namespace Clases
         public void ActualizarArea(int id_area, string nombre_area, string detalle)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE areas SET nombre = @nombre, detalle = @detalle ";
-                _actualizacion += "WHERE id_area = @id_area";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarArea", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_area", id_area);
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_area);
@@ -1006,13 +1008,13 @@ namespace Clases
         public void ActualizarCategoriaFinanzas(int id_categoria, string nombre_categoria,  string tipo)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE categorias_finanzas SET nombre = @nombre, tipo = @tipo ";
-                _actualizacion += "WHERE id_categoria = @id_categoria";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarCategoriaFinanzas", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_categoria", id_categoria);
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_categoria);
@@ -1031,13 +1033,13 @@ namespace Clases
         public void ActualizarProveedor(int id_proveedor, string nombre_proveedor, string tipo)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE proveedores SET nombre = @nombre, tipo = @tipo ";
-                _actualizacion += "WHERE id_proveedor = @id_proveedor";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarProveedor", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_proveedor", id_proveedor);
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre_proveedor);
@@ -1056,13 +1058,13 @@ namespace Clases
         public void ActualizarCultivo(int id_cultivo, string nombre, string variedad)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE cultivos SET nombre = @nombre, variedad = @variedad ";
-                _actualizacion += "WHERE id_cultivo = @id_cultivo";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarCultivo", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_cultivo", id_cultivo);
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
@@ -1081,13 +1083,13 @@ namespace Clases
         public void ActualizarMascota(int id_mascota, string nombre, string especie, string raza, DateOnly fecha_nac, decimal peso)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE mascotas SET nombre = @nombre, especie = @especie, raza = @raza, fecha_nac = @fecha_nac, peso = @peso ";
-                _actualizacion += "WHERE id_mascota = @id_mascota";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarMascota", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_mascota", id_mascota);
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
@@ -1109,13 +1111,13 @@ namespace Clases
         public void ActualizarVehiculo(int id_vehiculo, string placa, string marca, string modelo, int year, string poliza, DateOnly dekra)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE vehiculos SET placa = @placa, marca = @marca, modelo = @modelo, year = @year, poliza = @poliza, dekra = @dekra ";
-                _actualizacion += "WHERE id_vehiculo = @id_vehiculo";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarVehiculo", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_vehiculo", id_vehiculo);
                 _instruccionSQL.Parameters.AddWithValue("@placa", placa);
@@ -1138,13 +1140,13 @@ namespace Clases
         public void ActualizarLista(int id_lista, string nombre, string tipo, int? id_area, int? creada_por, DateOnly fecha_creada)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE listas SET nombre = @nombre, tipo = @tipo, id_area = @id_area, creada_por = @creada_por, fecha_creada = @fecha_creada ";
-                _actualizacion += "WHERE id_lista = @id_lista";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarLista", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 _instruccionSQL.Parameters.AddWithValue("@id_lista", id_lista);
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
@@ -1165,13 +1167,14 @@ namespace Clases
         public void ActualizarTarea(int id_tarea, int nuevo_id_lista, string nuevo_titulo, string nueva_descripcion, string nueva_prioridad, string nuevo_estado, DateOnly nueva_fecha_creacion, DateOnly? nueva_fecha_limite, string nueva_repeticion, int? nuevo_id_area)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
 
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE tareas SET id_lista = @id_lista, titulo = @titulo, descripcion = @descripcion, prioridad = @prioridad, estado = @estado, fecha_creacion = @fecha_creacion, fecha_limite = @fecha_limite, repeticion = @repeticion, id_area = @id_area WHERE id_tarea = @id";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarTarea", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
                 _instruccionSQL.Parameters.AddWithValue("@id_lista", nuevo_id_lista);
                 _instruccionSQL.Parameters.AddWithValue("@titulo", nuevo_titulo);
@@ -1182,7 +1185,7 @@ namespace Clases
                 _instruccionSQL.Parameters.AddWithValue("@fecha_limite", nueva_fecha_limite?.ToDateTime(TimeOnly.MinValue) ?? (object)DBNull.Value);
                 _instruccionSQL.Parameters.AddWithValue("@repeticion", nueva_repeticion);
                 _instruccionSQL.Parameters.AddWithValue("@id_area", nuevo_id_area ?? (object)DBNull.Value);
-                _instruccionSQL.Parameters.AddWithValue("@id", id_tarea);
+                _instruccionSQL.Parameters.AddWithValue("@id_tarea", id_tarea);
 
                 _instruccionSQL.ExecuteNonQuery();
             }
@@ -1198,12 +1201,13 @@ namespace Clases
         public void ActualizarAsignarTarea(int idTarea, int nuevoMiembro) {
         
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE tareas_asignaciones SET id_miembro = @id_miembro WHERE id_tarea = @id_tarea";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarAsignacionTarea", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_tarea", idTarea);
                 _instruccionSQL.Parameters.AddWithValue("@id_miembro", nuevoMiembro);
@@ -1221,13 +1225,13 @@ namespace Clases
         public void ActualizarEvento(int id_evento, string tipo, string titulo, DateTime fecha, string lugar, string notas, int idMiembro)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE eventos SET tipo = @tipo, titulo = @titulo, fecha_hora = @fecha, lugar = @lugar, notas = @notas, id_miembro = @id_miembro ";
-                _actualizacion += "WHERE id_evento = @id_evento";   
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarEvento", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_evento", id_evento);
                 _instruccionSQL.Parameters.AddWithValue("@tipo", tipo);
@@ -1250,13 +1254,13 @@ namespace Clases
         public void ActualizarFactura(int id_factura, int idProveedor, decimal monto, int idCategoria, DateTime fechaEmision, DateTime fechaVencimiento, string estado)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE facturas SET id_proveedor = @id_proveedor, monto = @monto, id_categoria = @id_categoria, fecha_emision = @fecha_emision, fecha_vencimiento = @fecha_vencimiento, estado = @estado ";
-                _actualizacion += "WHERE id_factura = @id_factura";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarFactura", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_factura", id_factura);
                 _instruccionSQL.Parameters.AddWithValue("@id_proveedor", idProveedor);
@@ -1279,13 +1283,13 @@ namespace Clases
         public void ActualizarPresupuesto(int id_presupuesto, int anio, string mes, int idCategoria, decimal montoPlaneado, decimal montoEjecutado)
         {
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE presupuestos SET anio = @anio, mes = @mes, id_categoria = @id_categoria, monto_planeado = @monto_planeado, monto_ejecutado = @monto_ejecutado ";
-                _actualizacion += "WHERE id_presupuesto = @id_presupuesto";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarPresupuesto", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_presupuesto", id_presupuesto);
                 _instruccionSQL.Parameters.AddWithValue("@anio", anio);
@@ -1307,13 +1311,13 @@ namespace Clases
         public void ActualizarSalario(int idSalario, int idMiembro, decimal monto, string periocidad, decimal deducciones, DateTime dechaInicio) { 
         
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE salarios SET id_miembro = @id_miembro, monto = @monto, periodicidad = @periodicidad, deducciones = @deducciones, fecha_inicio = @fecha_inicio ";
-                _actualizacion += "WHERE id_salario = @id_salario";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarSalario", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_salario", idSalario);
                 _instruccionSQL.Parameters.AddWithValue("@id_miembro", idMiembro);
@@ -1335,13 +1339,13 @@ namespace Clases
         public void ActualizarMovimiento(int idmov,DateTime fecha, string tipo, int idCategoria, decimal monto, string referencia) {
         
            SqlCommand sqlCommand;
-              string actualizacion;
                 try
                 {
                  EstablecerConexion();
-                 actualizacion = "UPDATE movimientos SET fecha = @fecha, tipo = @tipo, id_categoria = @id_categoria, monto = @monto, referencia = @referencia ";
-                 actualizacion += "WHERE id_mov = @id_mov";
-                 sqlCommand = new SqlCommand(actualizacion, _conexion);
+                 sqlCommand = new SqlCommand("spActualizarMovimiento", _conexion)
+                 {
+                     CommandType = CommandType.StoredProcedure
+                 };
                  //PARAMETROS
                  sqlCommand.Parameters.AddWithValue("@id_mov", idmov);
                  sqlCommand.Parameters.AddWithValue("@fecha", fecha);
@@ -1363,13 +1367,13 @@ namespace Clases
         public void ActualizarSiembra(int id_siembra, int idCultivo, DateTime fechaSiembra, DateTime? fechaEstimada, string sector, string notas) { 
         
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE siembras SET id_cultivo = @id_cultivo, fecha_siembra = @fecha_siembra, fecha_estim_cosecha = @fecha_estim_cosecha, sector = @sector, notas = @notas ";
-                _actualizacion += "WHERE id_siembra = @id_siembra";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarSiembra", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_siembra", id_siembra);
                 _instruccionSQL.Parameters.AddWithValue("@id_cultivo", idCultivo);
@@ -1391,13 +1395,13 @@ namespace Clases
         public void ActualizarTratamiento(int idTratamiento, int idSiembra, DateTime fecha, string producto, string dosis, string notas) { 
         
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE tratamientos SET id_siembra = @id_siembra, fecha = @fecha, producto = @producto, dosis = @dosis, notas = @notas ";
-                _actualizacion += "WHERE id_tratamiento = @id_tratamiento";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarTratamiento", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_tratamiento", idTratamiento);
                 _instruccionSQL.Parameters.AddWithValue("@id_siembra", idSiembra);
@@ -1419,13 +1423,13 @@ namespace Clases
         public void ActualizarInventario(int idItem, string nombre, string tipo, decimal cantidad, string unidad) { 
         
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE inventario_jardin SET nombre = @nombre, tipo = @tipo, cantidad = @cantidad, unidad = @unidad ";
-                _actualizacion += "WHERE id_item = @id_item";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarInventarioJardin", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_item", idItem);
                 _instruccionSQL.Parameters.AddWithValue("@nombre", nombre);
@@ -1446,13 +1450,13 @@ namespace Clases
         public void ActualizarMantenimientoVehiculo(int idMantenimiento, int idVehiculo, string tipo, string concepto, DateTime fecha, int? kilometraje, decimal costo, string taller, string notas) { 
         
             SqlCommand _instruccionSQL;
-            string _actualizacion;
             try
             {
                 EstablecerConexion();
-                _actualizacion = "UPDATE vehiculos_mantenimientos SET id_vehiculo = @id_vehiculo, tipo = @tipo, concepto = @concepto, fecha = @fecha, kilometraje = @kilometraje, costo = @costo, taller = @taller, notas = @notas ";
-                _actualizacion += "WHERE id_mant = @id_mant";
-                _instruccionSQL = new SqlCommand(_actualizacion, _conexion);
+                _instruccionSQL = new SqlCommand("spActualizarMantenimientoVehiculo", _conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //PARAMETROS
                 _instruccionSQL.Parameters.AddWithValue("@id_mant", idMantenimiento);
                 _instruccionSQL.Parameters.AddWithValue("@id_vehiculo", idVehiculo);

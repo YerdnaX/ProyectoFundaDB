@@ -3,7 +3,7 @@
    ========================================================== */
 -- miembros
 INSERT INTO miembros (nombre, apellido, email, rol, fecha_alta) VALUES
-('Joseph','Monge','joseph@example.com','ADMI','2025-01-10'),
+('Joseph','Monge','joseph@example.com','ADMIN','2025-01-10'),
 ('Wilberth','Mora','wilberth@example.com','EDITOR','2025-02-01'),
 ('Gaudy','Chinchilla','gaudy@example.com','LECTOR','2025-02-15'),
 ('Maria','Soto','maria@example.com','EDITOR','2025-03-01'),

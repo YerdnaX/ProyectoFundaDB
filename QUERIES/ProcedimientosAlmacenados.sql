@@ -2,11 +2,12 @@
 GO
 
 -- Asignaciones de botones
-CREATE OR ALTER PROCEDURE dbo.spGuardarAsignacionBoton
+-- Guarda asignacion unica de boton para un miembro
+CREATE OR ALTER PROCEDURE spGuardarAsignacionBoton
     @NumeroBoton INT,
     @IdMiembro INT,
-    @RutaImagen NVARCHAR(MAX),
-    @NombreImagen NVARCHAR(MAX)
+    @RutaImagen VARCHAR(MAX),
+    @NombreImagen VARCHAR(MAX)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -17,10 +18,11 @@ BEGIN
 END
 GO
 
--- Inserciones
-CREATE OR ALTER PROCEDURE dbo.spInsertarArea
-    @nombre NVARCHAR(150),
-    @detalle NVARCHAR(MAX) = NULL
+-- Inserts
+-- Inserta area en catalogo de areas
+CREATE OR ALTER PROCEDURE spInsertarArea
+    @nombre VARCHAR(150),
+    @detalle VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -28,9 +30,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarCategoriaFinanzas
-    @nombre NVARCHAR(150),
-    @tipo NVARCHAR(50)
+-- Inserta categoria de finanzas
+CREATE OR ALTER PROCEDURE spInsertarCategoriaFinanzas
+    @nombre VARCHAR(150),
+    @tipo VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -38,9 +41,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarProveedor
-    @nombre NVARCHAR(200),
-    @tipo NVARCHAR(50)
+-- Inserta proveedor en catalogo
+CREATE OR ALTER PROCEDURE spInsertarProveedor
+    @nombre VARCHAR(200),
+    @tipo VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -48,9 +52,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarCultivo
-    @nombre NVARCHAR(200),
-    @variedad NVARCHAR(200)
+-- Inserta cultivo y variedad
+CREATE OR ALTER PROCEDURE spInsertarCultivo
+    @nombre VARCHAR(200),
+    @variedad VARCHAR(200)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -58,10 +63,11 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarMascota
-    @nombre NVARCHAR(200),
-    @especie NVARCHAR(100),
-    @raza NVARCHAR(200) = NULL,
+-- Registra mascota con datos basicos
+CREATE OR ALTER PROCEDURE spInsertarMascota
+    @nombre VARCHAR(200),
+    @especie VARCHAR(100),
+    @raza VARCHAR(200) = NULL,
     @fecha_nac DATE,
     @peso DECIMAL(18,2)
 AS
@@ -72,12 +78,13 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarVehiculo
-    @placa NVARCHAR(50),
-    @marca NVARCHAR(100),
-    @modelo NVARCHAR(100),
+-- Registra vehiculo con datos de poliza
+CREATE OR ALTER PROCEDURE spInsertarVehiculo
+    @placa VARCHAR(50),
+    @marca VARCHAR(100),
+    @modelo VARCHAR(100),
     @year INT,
-    @poliza NVARCHAR(200) = NULL,
+    @poliza VARCHAR(200) = NULL,
     @dekra DATE
 AS
 BEGIN
@@ -87,9 +94,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarLista
-    @nombre NVARCHAR(200),
-    @tipo NVARCHAR(100),
+-- Crea lista opcionalmente ligada a un area
+CREATE OR ALTER PROCEDURE spInsertarLista
+    @nombre VARCHAR(200),
+    @tipo VARCHAR(100),
     @id_area INT = NULL,
     @creada_por INT = NULL,
     @fecha_creada DATE
@@ -101,15 +109,16 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarTarea
+-- Agrega tarea dentro de una lista
+CREATE OR ALTER PROCEDURE spInsertarTarea
     @id_lista INT,
-    @titulo NVARCHAR(200),
-    @descripcion NVARCHAR(MAX) = NULL,
-    @prioridad NVARCHAR(50),
-    @estado NVARCHAR(50),
+    @titulo VARCHAR(200),
+    @descripcion VARCHAR(MAX) = NULL,
+    @prioridad VARCHAR(50),
+    @estado VARCHAR(50),
     @fecha_creacion DATE,
     @fecha_limite DATE = NULL,
-    @repeticion NVARCHAR(50),
+    @repeticion VARCHAR(50),
     @id_area INT = NULL
 AS
 BEGIN
@@ -119,7 +128,8 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarAsignacionTarea
+-- Asigna miembro a una tarea
+CREATE OR ALTER PROCEDURE spInsertarAsignacionTarea
     @id_tarea INT,
     @id_miembro INT
 AS
@@ -130,12 +140,13 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarEvento
-    @tipo NVARCHAR(50),
-    @titulo NVARCHAR(200),
+-- Registra evento de calendario
+CREATE OR ALTER PROCEDURE spInsertarEvento
+    @tipo VARCHAR(50),
+    @titulo VARCHAR(200),
     @fecha DATETIME2,
-    @lugar NVARCHAR(200) = NULL,
-    @notas NVARCHAR(MAX) = NULL,
+    @lugar VARCHAR(200) = NULL,
+    @notas VARCHAR(MAX) = NULL,
     @id_miembro INT
 AS
 BEGIN
@@ -145,13 +156,14 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarFactura
+-- Registra factura de proveedor
+CREATE OR ALTER PROCEDURE spInsertarFactura
     @id_proveedor INT,
     @monto DECIMAL(18,2),
     @id_categoria INT,
     @fecha_emision DATETIME2,
     @fecha_vencimiento DATETIME2,
-    @estado NVARCHAR(50)
+    @estado VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -160,9 +172,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarPresupuesto
+-- Crea presupuesto mensual por categoria
+CREATE OR ALTER PROCEDURE spInsertarPresupuesto
     @anio INT,
-    @mes NVARCHAR(20),
+    @mes VARCHAR(20),
     @id_categoria INT,
     @monto_planeado DECIMAL(18,2),
     @monto_ejecutado DECIMAL(18,2)
@@ -174,10 +187,11 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarSalario
+-- Registra salario de un miembro
+CREATE OR ALTER PROCEDURE spInsertarSalario
     @id_miembro INT,
     @monto DECIMAL(18,2),
-    @periodicidad NVARCHAR(50),
+    @periodicidad VARCHAR(50),
     @deducciones DECIMAL(18,2),
     @fecha_inicio DATETIME2
 AS
@@ -188,12 +202,13 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarMovimiento
+-- Registra movimiento financiero
+CREATE OR ALTER PROCEDURE spInsertarMovimiento
     @fecha DATETIME2,
-    @tipo NVARCHAR(50),
+    @tipo VARCHAR(50),
     @id_categoria INT,
     @monto DECIMAL(18,2),
-    @referencia NVARCHAR(MAX) = NULL
+    @referencia VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -202,12 +217,13 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarSiembra
+-- Registra siembra programada
+CREATE OR ALTER PROCEDURE spInsertarSiembra
     @id_cultivo INT,
     @fecha_siembra DATETIME2,
     @fecha_estimada DATETIME2 = NULL,
-    @sector NVARCHAR(100),
-    @notas NVARCHAR(MAX) = NULL
+    @sector VARCHAR(100),
+    @notas VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -216,12 +232,13 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarTratamiento
+-- Registra tratamiento aplicado a siembra
+CREATE OR ALTER PROCEDURE spInsertarTratamiento
     @id_siembra INT,
     @fecha DATETIME2,
-    @producto NVARCHAR(200),
-    @dosis NVARCHAR(100),
-    @notas NVARCHAR(MAX) = NULL
+    @producto VARCHAR(200),
+    @dosis VARCHAR(100),
+    @notas VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -230,11 +247,12 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarInventarioJardin
-    @nombre NVARCHAR(200),
-    @tipo NVARCHAR(100),
+-- Registra item de inventario de jardin
+CREATE OR ALTER PROCEDURE spInsertarInventarioJardin
+    @nombre VARCHAR(200),
+    @tipo VARCHAR(100),
     @cantidad DECIMAL(18,2),
-    @unidad NVARCHAR(50)
+    @unidad VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -243,15 +261,16 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spInsertarMantenimientoVehiculo
+-- Registra mantenimiento de vehiculo
+CREATE OR ALTER PROCEDURE spInsertarMantenimientoVehiculo
     @id_vehiculo INT,
-    @tipo NVARCHAR(50),
-    @concepto NVARCHAR(200),
+    @tipo VARCHAR(50),
+    @concepto VARCHAR(200),
     @fecha DATETIME2,
     @kilometraje INT = NULL,
     @costo DECIMAL(18,2),
-    @taller NVARCHAR(200) = NULL,
-    @notas NVARCHAR(MAX) = NULL
+    @taller VARCHAR(200) = NULL,
+    @notas VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -261,10 +280,11 @@ END
 GO
 
 -- Actualizaciones
-CREATE OR ALTER PROCEDURE dbo.spActualizarArea
+-- Actualiza datos de un area
+CREATE OR ALTER PROCEDURE spActualizarArea
     @id_area INT,
-    @nombre NVARCHAR(150),
-    @detalle NVARCHAR(MAX) = NULL
+    @nombre VARCHAR(150),
+    @detalle VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -273,10 +293,11 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarCategoriaFinanzas
+-- Actualiza categoria de finanzas
+CREATE OR ALTER PROCEDURE spActualizarCategoriaFinanzas
     @id_categoria INT,
-    @nombre NVARCHAR(150),
-    @tipo NVARCHAR(50)
+    @nombre VARCHAR(150),
+    @tipo VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -285,10 +306,11 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarProveedor
+-- Actualiza datos de proveedor
+CREATE OR ALTER PROCEDURE spActualizarProveedor
     @id_proveedor INT,
-    @nombre NVARCHAR(200),
-    @tipo NVARCHAR(50)
+    @nombre VARCHAR(200),
+    @tipo VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -297,10 +319,11 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarCultivo
+-- Actualiza cultivo existente
+CREATE OR ALTER PROCEDURE spActualizarCultivo
     @id_cultivo INT,
-    @nombre NVARCHAR(200),
-    @variedad NVARCHAR(200)
+    @nombre VARCHAR(200),
+    @variedad VARCHAR(200)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -309,11 +332,12 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarMascota
+-- Actualiza mascota y peso
+CREATE OR ALTER PROCEDURE spActualizarMascota
     @id_mascota INT,
-    @nombre NVARCHAR(200),
-    @especie NVARCHAR(100),
-    @raza NVARCHAR(200) = NULL,
+    @nombre VARCHAR(200),
+    @especie VARCHAR(100),
+    @raza VARCHAR(200) = NULL,
     @fecha_nac DATE,
     @peso DECIMAL(18,2)
 AS
@@ -329,13 +353,14 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarVehiculo
+-- Actualiza vehiculo y poliza
+CREATE OR ALTER PROCEDURE spActualizarVehiculo
     @id_vehiculo INT,
-    @placa NVARCHAR(50),
-    @marca NVARCHAR(100),
-    @modelo NVARCHAR(100),
+    @placa VARCHAR(50),
+    @marca VARCHAR(100),
+    @modelo VARCHAR(100),
     @year INT,
-    @poliza NVARCHAR(200) = NULL,
+    @poliza VARCHAR(200) = NULL,
     @dekra DATE
 AS
 BEGIN
@@ -351,10 +376,11 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarLista
+-- Actualiza lista y metadatos
+CREATE OR ALTER PROCEDURE spActualizarLista
     @id_lista INT,
-    @nombre NVARCHAR(200),
-    @tipo NVARCHAR(100),
+    @nombre VARCHAR(200),
+    @tipo VARCHAR(100),
     @id_area INT = NULL,
     @creada_por INT = NULL,
     @fecha_creada DATE
@@ -371,16 +397,17 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarTarea
+-- Actualiza tarea con sus fechas y estado
+CREATE OR ALTER PROCEDURE spActualizarTarea
     @id_tarea INT,
     @id_lista INT,
-    @titulo NVARCHAR(200),
-    @descripcion NVARCHAR(MAX) = NULL,
-    @prioridad NVARCHAR(50),
-    @estado NVARCHAR(50),
+    @titulo VARCHAR(200),
+    @descripcion VARCHAR(MAX) = NULL,
+    @prioridad VARCHAR(50),
+    @estado VARCHAR(50),
     @fecha_creacion DATE,
     @fecha_limite DATE = NULL,
-    @repeticion NVARCHAR(50),
+    @repeticion VARCHAR(50),
     @id_area INT = NULL
 AS
 BEGIN
@@ -399,7 +426,8 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarAsignacionTarea
+-- Actualiza asignacion de miembro para tarea
+CREATE OR ALTER PROCEDURE spActualizarAsignacionTarea
     @id_tarea INT,
     @id_miembro INT
 AS
@@ -411,13 +439,14 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarEvento
+-- Actualiza evento existente
+CREATE OR ALTER PROCEDURE spActualizarEvento
     @id_evento INT,
-    @tipo NVARCHAR(50),
-    @titulo NVARCHAR(200),
+    @tipo VARCHAR(50),
+    @titulo VARCHAR(200),
     @fecha DATETIME2,
-    @lugar NVARCHAR(200) = NULL,
-    @notas NVARCHAR(MAX) = NULL,
+    @lugar VARCHAR(200) = NULL,
+    @notas VARCHAR(MAX) = NULL,
     @id_miembro INT = NULL
 AS
 BEGIN
@@ -433,14 +462,15 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarFactura
+-- Actualiza factura registrada
+CREATE OR ALTER PROCEDURE spActualizarFactura
     @id_factura INT,
     @id_proveedor INT,
     @monto DECIMAL(18,2),
     @id_categoria INT,
     @fecha_emision DATETIME2,
     @fecha_vencimiento DATETIME2,
-    @estado NVARCHAR(50)
+    @estado VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -455,10 +485,11 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarPresupuesto
+-- Actualiza presupuesto mensual
+CREATE OR ALTER PROCEDURE spActualizarPresupuesto
     @id_presupuesto INT,
     @anio INT,
-    @mes NVARCHAR(20),
+    @mes VARCHAR(20),
     @id_categoria INT,
     @monto_planeado DECIMAL(18,2),
     @monto_ejecutado DECIMAL(18,2)
@@ -475,11 +506,12 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarSalario
+-- Actualiza salario y deducciones
+CREATE OR ALTER PROCEDURE spActualizarSalario
     @id_salario INT,
     @id_miembro INT,
     @monto DECIMAL(18,2),
-    @periodicidad NVARCHAR(50),
+    @periodicidad VARCHAR(50),
     @deducciones DECIMAL(18,2),
     @fecha_inicio DATETIME2
 AS
@@ -495,13 +527,14 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarMovimiento
+-- Actualiza movimiento financiero
+CREATE OR ALTER PROCEDURE spActualizarMovimiento
     @id_mov INT,
     @fecha DATETIME2,
-    @tipo NVARCHAR(50),
+    @tipo VARCHAR(50),
     @id_categoria INT,
     @monto DECIMAL(18,2),
-    @referencia NVARCHAR(MAX) = NULL
+    @referencia VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -515,13 +548,14 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarSiembra
+-- Actualiza siembra y su cosecha estimada
+CREATE OR ALTER PROCEDURE spActualizarSiembra
     @id_siembra INT,
     @id_cultivo INT,
     @fecha_siembra DATETIME2,
     @fecha_estim_cosecha DATETIME2 = NULL,
-    @sector NVARCHAR(100),
-    @notas NVARCHAR(MAX) = NULL
+    @sector VARCHAR(100),
+    @notas VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -535,13 +569,14 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarTratamiento
+-- Actualiza tratamiento aplicado
+CREATE OR ALTER PROCEDURE spActualizarTratamiento
     @id_tratamiento INT,
     @id_siembra INT,
     @fecha DATETIME2,
-    @producto NVARCHAR(200),
-    @dosis NVARCHAR(100),
-    @notas NVARCHAR(MAX) = NULL
+    @producto VARCHAR(200),
+    @dosis VARCHAR(100),
+    @notas VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -555,12 +590,13 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarInventarioJardin
+-- Actualiza item de inventario de jardin
+CREATE OR ALTER PROCEDURE spActualizarInventarioJardin
     @id_item INT,
-    @nombre NVARCHAR(200),
-    @tipo NVARCHAR(100),
+    @nombre VARCHAR(200),
+    @tipo VARCHAR(100),
     @cantidad DECIMAL(18,2),
-    @unidad NVARCHAR(50)
+    @unidad VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -573,16 +609,17 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.spActualizarMantenimientoVehiculo
+-- Actualiza mantenimiento registrado de un vehiculo
+CREATE OR ALTER PROCEDURE spActualizarMantenimientoVehiculo
     @id_mant INT,
     @id_vehiculo INT,
-    @tipo NVARCHAR(50),
-    @concepto NVARCHAR(200),
+    @tipo VARCHAR(50),
+    @concepto VARCHAR(200),
     @fecha DATETIME2,
     @kilometraje INT = NULL,
     @costo DECIMAL(18,2),
-    @taller NVARCHAR(200) = NULL,
-    @notas NVARCHAR(MAX) = NULL
+    @taller VARCHAR(200) = NULL,
+    @notas VARCHAR(MAX) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;

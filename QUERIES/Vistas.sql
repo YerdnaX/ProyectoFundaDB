@@ -17,6 +17,7 @@ CREATE VIEW TAREASPENDIENTES AS
     JOIN listas L ON T.id_lista = L.id_lista
     LEFT JOIN areas A ON T.id_area = A.id_area
     WHERE T.estado = 'PENDIENTE';
+GO
 
      --VISTA 2
 CREATE VIEW FACTURASAVENCER AS
@@ -31,7 +32,7 @@ CREATE VIEW FACTURASAVENCER AS
     JOIN proveedores P ON F.id_proveedor = P.id_proveedor
     JOIN categorias_finanzas CF ON F.categoria_id = CF.id_categoria
     WHERE F.estado IN ('PENDIENTE', 'VENCIDA');
-    
+GO 
 
      --VISTA 3
 CREATE VIEW EVENTOSDELMES AS
@@ -45,6 +46,7 @@ CREATE VIEW EVENTOSDELMES AS
     LEFT JOIN miembros M ON E.id_miembro = M.id_miembro
     WHERE MONTH(E.fecha_hora) = MONTH(GETDATE())
         AND YEAR(E.fecha_hora) = YEAR(GETDATE());
+GO
 
      --VISTA 4
 CREATE VIEW MANTEVEHICULO AS
@@ -62,6 +64,7 @@ CREATE VIEW MANTEVEHICULO AS
         DATEDIFF(DAY, VM.fecha, GETDATE()) as [Dias desde el mantenimiento]
     FROM vehiculos V
     JOIN vehiculos_mantenimientos VM ON V.id_vehiculo = VM.id_vehiculo;
+GO
 
      --VISTA 5
 CREATE VIEW SALUDMASCOTA AS
@@ -77,6 +80,7 @@ CREATE VIEW SALUDMASCOTA AS
     FROM mascotas M
     LEFT JOIN vet_visitas V ON M.id_mascota = V.id_mascota
     LEFT JOIN mascotas_salud MS ON M.id_mascota = MS.id_mascota;
+GO
 
      --VISTA 6
 CREATE VIEW RESUMENFINANCIERO AS
@@ -90,6 +94,7 @@ CREATE VIEW RESUMENFINANCIERO AS
     WHERE MONTH(M.fecha) = MONTH(GETDATE()) 
         AND YEAR(M.fecha) = YEAR(GETDATE())
     GROUP BY CF.nombre, CF.tipo;
+GO
 
      --VISTA 7
 CREATE VIEW MEDICAMENTOSACTIVOS AS
@@ -105,7 +110,7 @@ CREATE VIEW MEDICAMENTOSACTIVOS AS
     JOIN mascotas M ON MM.id_mascota = M.id_mascota
     WHERE MM.fecha_fin IS NULL 
         OR MM.fecha_fin >= GETDATE();
-
+GO
      --VISTA 8
 CREATE VIEW TOTALFACTURASPAGAR AS
     SELECT 
@@ -113,6 +118,7 @@ CREATE VIEW TOTALFACTURASPAGAR AS
         SUM(F.monto) as [Monto total pendiente]
     FROM facturas F
     WHERE F.estado IN ('PENDIENTE', 'VENCIDA');
+GO
 
      --VISTA 9
 CREATE VIEW GASTOVETERINARIOPORMASCOTA AS
@@ -124,6 +130,7 @@ CREATE VIEW GASTOVETERINARIOPORMASCOTA AS
     FROM mascotas M
     LEFT JOIN vet_visitas V ON M.id_mascota = V.id_mascota
     GROUP BY M.id_mascota, M.nombre, M.especie;
+GO
 
     --VISTA 10
 CREATE VIEW RESUMENVEHICULOS AS
@@ -139,3 +146,4 @@ CREATE VIEW RESUMENVEHICULOS AS
     FROM vehiculos V
     LEFT JOIN vehiculos_mantenimientos VM ON V.id_vehiculo = VM.id_vehiculo
     GROUP BY V.id_vehiculo, V.placa, V.marca, V.modelo, V.anio, V.dekra_fecha;
+GO

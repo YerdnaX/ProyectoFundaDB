@@ -1,26 +1,26 @@
 USE domus_hogar;
 GO
 
-/* Tablas auxiliares para auditoria y resúmenes */
-IF OBJECT_ID('dbo.log_miembros', 'U') IS NULL
+/* Tablas auxiliares para auditoria y resumenes */
+IF OBJECT_ID('log_miembros', 'U') IS NULL
 BEGIN
-    CREATE TABLE dbo.log_miembros (
+    CREATE TABLE log_miembros (
         id_log INT IDENTITY(1,1) PRIMARY KEY,
-        accion NVARCHAR(10) NOT NULL,
+        accion VARCHAR(10) NOT NULL,
         id_miembro INT NULL,
-        nombre NVARCHAR(80) NULL,
-        apellido NVARCHAR(80) NULL,
-        rol NVARCHAR(50) NULL,
+        nombre VARCHAR(80) NULL,
+        apellido VARCHAR(80) NULL,
+        rol VARCHAR(50) NULL,
         fecha_registro DATETIME2 NOT NULL DEFAULT SYSDATETIME()
     );
 END
 GO
 
-IF OBJECT_ID('dbo.movimientos_resumen', 'U') IS NULL
+IF OBJECT_ID('movimientos_resume', 'U') IS NULL
 BEGIN
-    CREATE TABLE dbo.movimientos_resumen (
+    CREATE TABLE movimientos_resumen (
         categoria_id INT NOT NULL,
-        tipo NVARCHAR(10) NOT NULL,
+        tipo VARCHAR(10) NOT NULL,
         total_monto DECIMAL(18,2) NOT NULL,
         cantidad INT NOT NULL,
         PRIMARY KEY (categoria_id, tipo)
@@ -28,9 +28,9 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID('dbo.vehiculos_mant_resumen', 'U') IS NULL
+IF OBJECT_ID('vehiculos_mant_resume', 'U') IS NULL
 BEGIN
-    CREATE TABLE dbo.vehiculos_mant_resumen (
+    CREATE TABLE vehiculos_mant_resumen (
         id_vehiculo INT PRIMARY KEY,
         total_mantenimientos INT NOT NULL,
         ultima_fecha DATE NULL
@@ -38,19 +38,19 @@ BEGIN
 END
 GO
 
-/* 1. Auditoría de miembros */
+/* 1. Auditoria de miembros */
 CREATE OR ALTER TRIGGER trg_miembros_audit
-ON dbo.miembros
+ON miembros
 AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    INSERT INTO dbo.log_miembros (accion, id_miembro, nombre, apellido, rol)
+    INSERT INTO log_miembros (accion, id_miembro, nombre, apellido, rol)
     SELECT 'INSERT', i.id_miembro, i.nombre, i.apellido, i.rol
     FROM inserted i;
 
-    INSERT INTO dbo.log_miembros (accion, id_miembro, nombre, apellido, rol)
+    INSERT INTO log_miembros (accion, id_miembro, nombre, apellido, rol)
     SELECT 'DELETE', d.id_miembro, d.nombre, d.apellido, d.rol
     FROM deleted d;
 END
@@ -58,7 +58,7 @@ GO
 
 /* 2. Validar fechas futuras en eventos */
 CREATE OR ALTER TRIGGER trg_eventos_fecha_futura
-ON dbo.eventos
+ON eventos
 AFTER INSERT, UPDATE
 AS
 BEGIN
@@ -67,7 +67,7 @@ BEGIN
         SELECT 1
         FROM inserted i
         WHERE i.fecha_hora < SYSDATETIME()
-          AND i.tipo IN (N'CITA_MEDICA', N'CUMPLE', N'ANIVERSARIO', N'UNIVERSIDAD')
+          AND i.tipo IN ('CITA_MEDICA', 'CUMPLE', 'ANIVERSARIO', 'UNIVERSIDAD')
     )
     BEGIN
         RAISERROR('La fecha del evento debe ser futura.',16,1);
@@ -79,23 +79,23 @@ GO
 
 /* 3. Ajustar estado de facturas vencidas */
 CREATE OR ALTER TRIGGER trg_facturas_estado
-ON dbo.facturas
+ON facturas
 AFTER INSERT, UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
     UPDATE f
-    SET estado = N'VENCIDA'
-    FROM dbo.facturas f
+    SET estado = 'VENCIDA'
+    FROM facturas f
     JOIN inserted i ON f.id_factura = i.id_factura
-    WHERE f.estado <> N'PAGADA'
+    WHERE f.estado <> 'PAGADA'
       AND f.fecha_venc < CONVERT(date, SYSDATETIME());
 END
 GO
 
 /* 4. Evitar presupuestos duplicados por (anio, mes, id_categoria) */
 CREATE OR ALTER TRIGGER trg_presupuestos_unicos
-ON dbo.presupuestos
+ON presupuestos
 AFTER INSERT
 AS
 BEGIN
@@ -103,7 +103,7 @@ BEGIN
     IF EXISTS (
         SELECT 1
         FROM inserted i
-        JOIN dbo.presupuestos p
+        JOIN presupuestos p
           ON p.anio = i.anio
          AND p.mes = i.mes
          AND p.id_categoria = i.id_categoria
@@ -116,9 +116,9 @@ BEGIN
 END
 GO
 
-/* 5. Mantener resumen por categoría/tipo en movimientos */
+/* 5. Mantener resumen por categoria/tipo en movimientos */
 CREATE OR ALTER TRIGGER trg_movimientos_resumen
-ON dbo.movimientos
+ON movimientos
 AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
@@ -129,10 +129,10 @@ BEGIN
         UNION
         SELECT id_categoria AS categoria_id, tipo FROM deleted
     )
-    MERGE dbo.movimientos_resumen AS tgt
+    MERGE movimientos_resumen AS tgt
     USING (
         SELECT m.id_categoria AS categoria_id, m.tipo, SUM(m.monto) AS total_monto, COUNT(*) AS cantidad
-        FROM dbo.movimientos m
+        FROM movimientos m
         JOIN cambios c ON c.categoria_id = m.id_categoria AND c.tipo = m.tipo
         GROUP BY m.id_categoria, m.tipo
     ) AS src
@@ -149,7 +149,7 @@ GO
 
 /* 6. Validar fechas en tareas */
 CREATE OR ALTER TRIGGER trg_tareas_fechas
-ON dbo.tareas
+ON tareas
 AFTER INSERT, UPDATE
 AS
 BEGIN
@@ -170,7 +170,7 @@ GO
 
 /* 7. Evitar asignaciones duplicadas de tareas */
 CREATE OR ALTER TRIGGER trg_tareas_asignaciones_unicas
-ON dbo.tareas_asignaciones
+ON tareas_asignaciones
 INSTEAD OF INSERT
 AS
 BEGIN
@@ -178,7 +178,7 @@ BEGIN
     IF EXISTS (
         SELECT 1
         FROM inserted i
-        JOIN dbo.tareas_asignaciones ta
+        JOIN tareas_asignaciones ta
           ON ta.id_tarea = i.id_tarea AND ta.id_miembro = i.id_miembro
     )
     BEGIN
@@ -186,14 +186,14 @@ BEGIN
         RETURN;
     END
 
-    INSERT INTO dbo.tareas_asignaciones (id_tarea, id_miembro)
+    INSERT INTO tareas_asignaciones (id_tarea, id_miembro)
     SELECT id_tarea, id_miembro FROM inserted;
 END
 GO
 
-/* 8. Resumen de mantenimientos por vehículo */
+/* 8. Resumen de mantenimientos por vehculo */
 CREATE OR ALTER TRIGGER trg_mant_vehiculo_resumen
-ON dbo.vehiculos_mantenimientos
+ON vehiculos_mantenimientos
 AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
@@ -204,12 +204,12 @@ BEGIN
         UNION
         SELECT id_vehiculo FROM deleted
     )
-    MERGE dbo.vehiculos_mant_resumen AS tgt
+    MERGE vehiculos_mant_resumen AS tgt
     USING (
         SELECT vm.id_vehiculo,
                COUNT(*) AS total_mantenimientos,
                MAX(vm.fecha) AS ultima_fecha
-        FROM dbo.vehiculos_mantenimientos vm
+        FROM vehiculos_mantenimientos vm
         JOIN cambios c ON c.id_vehiculo = vm.id_vehiculo
         GROUP BY vm.id_vehiculo
     ) AS src
@@ -227,7 +227,7 @@ GO
 
 /* 9. Validar fechas en medicamentos de mascotas */
 CREATE OR ALTER TRIGGER trg_mascotas_meds_fechas
-ON dbo.mascotas_meds
+ON mascotas_meds
 AFTER INSERT, UPDATE
 AS
 BEGIN
@@ -246,9 +246,9 @@ BEGIN
 END
 GO
 
-/* 10. Validar fechas en siembras */
+/* 10. Validar fechas en siembra */
 CREATE OR ALTER TRIGGER trg_siembras_fechas
-ON dbo.siembras
+ON siembras
 AFTER INSERT, UPDATE
 AS
 BEGIN

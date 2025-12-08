@@ -157,6 +157,11 @@ namespace ProyectoFundaBD
 
             this.Hide();
         }
+        private void btngastomensual_Click(object sender, RoutedEventArgs e)
+        {
+            var ventana = new PrediccionGastosMensuales();
+            ventana.Show();
+        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

@@ -17,8 +17,8 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <!-- Título -->
-        <Label Content="Menú Principal"
+        <!-- Titulo -->
+        <Label Content="Menu Principal"
            HorizontalAlignment="Center"
            VerticalAlignment="Top"
            Margin="0,25,0,0"
@@ -54,7 +54,7 @@
                 </StackPanel>
             </Button>
 
-            <!-- Cultivos, Mascotas y Vehículo (botón agrupado) -->
+            <!-- Cultivos, Mascotas y Vehiculo (boton agrupado) -->
             <Button x:Name="btncultimasvehi" Click="btncultimasvehi_Click"
                 Width="130" Height="130" Margin="12"
                 Background="Transparent" BorderThickness="0" Cursor="Hand">
@@ -91,7 +91,7 @@
                     </StackPanel>
                 </Button>
 
-                <!-- Asignación de Tareas -->
+                <!-- Asignacion de Tareas -->
                 <Button x:Name="btnasignacion" Click="btnasignacion_Click"
                     Width="130" Height="130" Margin="12"
                     Background="Transparent" BorderThickness="0" Cursor="Hand">
@@ -101,7 +101,7 @@
                                 <ImageBrush ImageSource="IconosMenu/AsignacionTareas.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBlock Text="Asignación" Foreground="White" FontFamily="Arial Black" FontSize="14" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <TextBlock Text="Asignacion" Foreground="White" FontFamily="Arial Black" FontSize="14" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                     </StackPanel>
                 </Button>
 
@@ -206,7 +206,7 @@
                     </StackPanel>
                 </Button>
 
-                <!-- Vehículo -->
+                <!-- Vehiculo -->
                 <Button x:Name="btnvehiculo" Click="btnvehiculo_Click"
                     Width="130" Height="130" Margin="12"
                     Background="Transparent" BorderThickness="0" Cursor="Hand">
@@ -216,7 +216,17 @@
                                 <ImageBrush ImageSource="IconosMenu/Vehiculo.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBlock Text="Vehículo" Foreground="White" FontFamily="Arial Black" FontSize="14" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <TextBlock Text="Vehiculo" Foreground="White" FontFamily="Arial Black" FontSize="14" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btngastomensual" Click="btngastomensual_Click" Width="130" Height="130" Margin="12" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                    <StackPanel>
+                        <Ellipse Width="90" Height="90">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="IconosMenu/Moviminetos.png"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="Gasto mensual" Foreground="White" FontFamily="Arial Black" FontSize="12" HorizontalAlignment="Center" Margin="0,8,0,0" TextWrapping="Wrap" Width="110"/>
                     </StackPanel>
                 </Button>
             </WrapPanel>
@@ -224,3 +234,4 @@
         </StackPanel>
     </Grid>
 </Window>
+

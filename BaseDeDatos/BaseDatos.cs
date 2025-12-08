@@ -34,6 +34,7 @@ namespace Clases
         DataTable Medicamentos;
         DataTable Salud;
         DataTable Mantenimiento;
+        DataTable GastoMensualTabla;
 
         DataSet dsTablas = new DataSet();
         SqlConnection _conexion;
@@ -62,6 +63,7 @@ namespace Clases
         public DataTable TablaMedicamentos { get => Medicamentos; set => Medicamentos = value; }
         public DataTable TablaSalud { get => Salud; set => Salud = value; }
         public DataTable TablaMantenimiento { get => Mantenimiento; set => Mantenimiento = value; }
+        public DataTable TablaGastoMensual { get => GastoMensualTabla; set => GastoMensualTabla = value; }
 
         private void EstablecerConexion()
         {
@@ -2836,6 +2838,43 @@ namespace Clases
             {
                 _conexion.Close();
             }
+        }
+        
+        public List<GastoMensual> ObtenerGastoMensual()
+        {
+            var resultado = new List<GastoMensual>();
+
+            try
+            {
+                EstablecerConexion();
+
+                using (var cmd = new SqlCommand("Gasto_Mensual", _conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            resultado.Add(new GastoMensual
+                            {
+                                Anio = reader.GetInt32(reader.GetOrdinal("anio")),
+                                Mes = reader.GetInt32(reader.GetOrdinal("mes")),
+                                Egreso = reader.GetDecimal(reader.GetOrdinal("egreso")),
+                                EgresoPrev = reader.IsDBNull(reader.GetOrdinal("egresoPrevio")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("egresoPrevio")),
+                                EgresoMoM = reader.IsDBNull(reader.GetOrdinal("egresoMoM")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("egresoMoM")),
+                                EgresoForecastNaive = reader.IsDBNull(reader.GetOrdinal("egresoPronostico")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("egresoPronostico"))
+                            });
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                _conexion.Close();
+            }
+
+            return resultado;
         }
         public void MostrarTareasPendientes()
         {

@@ -33,6 +33,7 @@ namespace ProyectoFundaBD
             CargarCultivos();
             CargarMascotas();
             CargarVehiculo();
+            CargarEspeciesMascotas();
 
             dbcultivos.SelectionChanged += dbcultivos_SelectionChanged;
             dbmascotas.SelectionChanged += dbmascotas_SelectionChanged;
@@ -95,6 +96,14 @@ namespace ProyectoFundaBD
 
             // Deshabilitar ComboBox
             boxespecie.IsEnabled = false;
+        }
+        private void CargarEspeciesMascotas()
+        {
+            boxespecie.Items.Add("PERRO");
+            boxespecie.Items.Add("GATO");
+            boxespecie.Items.Add("AVE");
+            boxespecie.Items.Add("PEZ");
+            boxespecie.Items.Add("OTRO");
         }
         private void CargarCultivos()
         {

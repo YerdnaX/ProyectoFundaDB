@@ -8,7 +8,7 @@
         Title="AsignacionTareas" Height="450" Width="800"
         Closing="Window_Closing"
         ResizeMode="CanMinimize">
-    <Grid>
+    <Grid Margin="0,0,0,-46">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF0003F1" Offset="0.538"/>
@@ -40,7 +40,7 @@
             DisplayMemberPath="Nombre"
             SelectedValuePath="ID_Miembros" Height="27">
         </ComboBox>
-        <DataGrid x:Name="dbtareaspendientes" AutoGenerateColumns="False" Margin="71,217,81,30"
+        <DataGrid x:Name="dbtareaspendientes" AutoGenerateColumns="False" Margin="76,257,76,10"
           IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
           CanUserReorderColumns="False" CanUserResizeColumns="True"
           CanUserResizeRows="False" CanUserSortColumns="True"
@@ -156,5 +156,6 @@
                 <TextBlock Text="Modificacion Tareas" VerticalAlignment="Center" FontFamily="Arial Black" Foreground="White"/>
             </StackPanel>
         </Button>
+        <Label Content="Tareas Pendientes" HorizontalAlignment="Center" Margin="0,215,0,0" VerticalAlignment="Top" Width="216" FontFamily="Cooper Black" FontSize="22" FontWeight="Bold" Foreground="White"/>
     </Grid>
 </Window>

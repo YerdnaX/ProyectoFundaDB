@@ -202,9 +202,19 @@ namespace ProyectoFundaBD
 
         }
 
-        private void txtnombrefinanzas_Copiar_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
+        private void btnInformacionDetallada_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InformacionDetallada ventanaInfo = new InformacionDetallada();
+                ventanaInfo.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir la ventana de informacion: " + ex.Message,
+                               "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

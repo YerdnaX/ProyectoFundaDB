@@ -8,14 +8,8 @@
         Title="Menu Principal" Height="650" Width="1100"
         Closing="Window_Closing"
         ResizeMode="CanMinimize">
-    <Grid>
+    <Grid Background="#FF0003F1">
         <!-- Fondo degradado -->
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF0003F1" Offset="0.458"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
 
         <!-- Titulo -->
         <Label Content="Menu Principal"
@@ -223,7 +217,7 @@
                     <StackPanel>
                         <Ellipse Width="90" Height="90">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="IconosMenu/Moviminetos.png"/>
+                                <ImageBrush ImageSource="/IconosMenu/Gatos.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock Text="Gasto mensual" Foreground="White" FontFamily="Arial Black" FontSize="12" HorizontalAlignment="Center" Margin="0,8,0,0" TextWrapping="Wrap" Width="110"/>

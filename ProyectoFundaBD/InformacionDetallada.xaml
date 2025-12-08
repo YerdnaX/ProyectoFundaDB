@@ -1,0 +1,145 @@
+﻿<Window x:Class="ProyectoFundaBD.InformacionDetallada"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProyectoFundaBD"
+        mc:Ignorable="d"
+        Title="Información Detallada de Mascotas" Height="750" Width="1200"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0003F1" Offset="0.312"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        
+        <TabControl Margin="10" BorderThickness="1">
+            
+            <TabItem Header="Salud de Mascotas">
+                <Grid>
+                    <DataGrid x:Name="dgSaludMascota" AutoGenerateColumns="False" Margin="10"
+                              IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                              CanUserReorderColumns="False" CanUserResizeColumns="True"
+                              CanUserResizeRows="False" CanUserSortColumns="True"
+                              SelectionMode="Single" SelectionUnit="FullRow"
+                              Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
+                              RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
+                              FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
+                              GridLinesVisibility="None" RowHeight="35"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#FF0003F1"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="Height" Value="35"/>
+                                <Setter Property="Padding" Value="10,5"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mascota" Binding="{Binding Mascota}" Width="120"/>
+                            <DataGridTextColumn Header="Especie" Binding="{Binding especie}" Width="100"/>
+                            <DataGridTextColumn Header="Raza" Binding="{Binding raza}" Width="100"/>
+                            <DataGridTextColumn Header="Última Vista" Binding="{Binding [Ultima vista]}" Width="120"/>
+                            <DataGridTextColumn Header="Motivo" Binding="{Binding motivo}" Width="*" MinWidth="150"/>
+                            <DataGridTextColumn Header="Costo" Binding="{Binding costo}" Width="80"/>
+                            <DataGridTextColumn Header="Último Evento" Binding="{Binding [Ultimo evento]}" Width="*" MinWidth="150"/>
+                            <DataGridTextColumn Header="Fecha Evento" Binding="{Binding [fecha evento]}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Medicamentos Activos">
+                <Grid>
+                    <DataGrid x:Name="dgMedicamentosActivos" AutoGenerateColumns="False" Margin="10"
+                              IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                              CanUserReorderColumns="False" CanUserResizeColumns="True"
+                              CanUserResizeRows="False" CanUserSortColumns="True"
+                              SelectionMode="Single" SelectionUnit="FullRow"
+                              Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
+                              RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
+                              FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
+                              GridLinesVisibility="None" RowHeight="35"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#FF0003F1"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="Height" Value="35"/>
+                                <Setter Property="Padding" Value="10,5"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mascota" Binding="{Binding Mascota}" Width="120"/>
+                            <DataGridTextColumn Header="Medicamento" Binding="{Binding Medicamento}" Width="*" MinWidth="150"/>
+                            <DataGridTextColumn Header="Dosis" Binding="{Binding dosis}" Width="100"/>
+                            <DataGridTextColumn Header="Frecuencia" Binding="{Binding frecuencia}" Width="120"/>
+                            <DataGridTextColumn Header="Fecha Inicio" Binding="{Binding fecha_ini}" Width="120"/>
+                            <DataGridTextColumn Header="Fecha Fin" Binding="{Binding fecha_fin}" Width="120"/>
+                            <DataGridTextColumn Header="Días Restantes" Binding="{Binding [Dias Restantes]}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Gastos Veterinaria">
+                <Grid>
+                    <DataGrid x:Name="dgGastosVeterinaria" AutoGenerateColumns="False" Margin="336,140,336,140"
+                              IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                              CanUserReorderColumns="False" CanUserResizeColumns="True"
+                              CanUserResizeRows="False" CanUserSortColumns="True"
+                              SelectionMode="Single" SelectionUnit="FullRow"
+                              Background="#FFF8F9FA" BorderBrush="#E0E0E0" BorderThickness="1"
+                              RowBackground="Transparent" AlternatingRowBackground="#F5F5F5"
+                              FontFamily="Segoe UI" FontSize="12" HeadersVisibility="All"
+                              GridLinesVisibility="None" RowHeight="35"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#FF0003F1"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="Height" Value="35"/>
+                                <Setter Property="Padding" Value="10,5"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mascota" Binding="{Binding Mascota}" Width="120"/>
+                            <DataGridTextColumn Header="Especie" Binding="{Binding especie}" Width="100"/>
+                            <DataGridTextColumn Header="Cantidad Visitas" Binding="{Binding [Cantidad Visitas]}" Width="120"/>
+                            <DataGridTextColumn Header="Total Gastado" Binding="{Binding [Total Gastado]}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+        </TabControl>
+        
+    </Grid>
+</Window>

@@ -14,6 +14,7 @@
     <None Remove="IconosMenu\Culti_Vehi_Masco.png" />
     <None Remove="IconosMenu\Eventos.png" />
     <None Remove="IconosMenu\Facturas.png" />
+    <None Remove="IconosMenu\Gatos.png" />
     <None Remove="IconosMenu\InformacionGeneral.png" />
     <None Remove="IconosMenu\ListasYTareas.png" />
     <None Remove="IconosMenu\Mascotas.png" />
@@ -27,6 +28,7 @@
     <None Remove="Imagenes\editar.png" />
     <None Remove="Imagenes\elefante.jfif" />
     <None Remove="Imagenes\gallina.jfif" />
+    <None Remove="Imagenes\informacion.png" />
     <None Remove="Imagenes\pinguino.jfif" />
     <None Remove="Imagenes\tiburon.jfif" />
     <None Remove="Imagenes\zorro.jfif" />
@@ -46,6 +48,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IconosMenu\Facturas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IconosMenu\Gatos.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="IconosMenu\InformacionGeneral.png">
@@ -86,6 +91,9 @@
     </Content>
     <Content Include="Imagenes\gallina.jfif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\informacion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Imagenes\pinguino.jfif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

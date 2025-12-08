@@ -73,7 +73,7 @@
           FontSize="18"  
           ItemsSource="{Binding Listas}"
           DisplayMemberPath="Nombre_Lista"
-          SelectedValuePath="ID_listas" Height="27">
+          SelectedValuePath="ID_Listas" Height="27">
         </ComboBox>
         <TextBox x:Name="txttitulo" HorizontalAlignment="Left" Margin="857,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBox x:Name="txtdescrip" HorizontalAlignment="Left" Margin="930,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>

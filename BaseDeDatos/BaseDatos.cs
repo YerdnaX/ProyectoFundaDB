@@ -3048,9 +3048,9 @@ namespace Clases
                            modelo,
                            anio,
                            dekra_fecha,
-                           [Días para DEKRA],
+                           [Dias para DEKRA],
                            [Total Mantenimientos],
-                           [Último Mantenimiento]
+                           [Ultimo Mantenimiento]
                           FROM RESUMENVEHICULOS";
 
             SqlDataAdapter sqlDA;

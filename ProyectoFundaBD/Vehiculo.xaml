@@ -305,7 +305,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="DIAS DEKRA" Binding="{Binding [Días para DEKRA]}" Width="*">
+                <DataGridTextColumn Header="DIAS DEKRA" Binding="{Binding [Dias para DEKRA]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -325,7 +325,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="ULTIMO MAT" Binding="{Binding [Último Mantenimiento]}" Width="*">
+                <DataGridTextColumn Header="ULTIMO MAT" Binding="{Binding [Ultimo Mantenimiento]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Left"/>

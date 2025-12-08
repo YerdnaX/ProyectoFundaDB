@@ -140,9 +140,9 @@ CREATE VIEW RESUMENVEHICULOS AS
         V.modelo,
         V.anio,
         V.dekra_fecha,
-        DATEDIFF(DAY, GETDATE(), V.dekra_fecha) as [D�as para DEKRA],
+        DATEDIFF(DAY, GETDATE(), V.dekra_fecha) as [Dias para DEKRA],
         COUNT(VM.id_mant) as [Total Mantenimientos],
-        MAX(VM.fecha) as [�ltimo Mantenimiento]
+        MAX(VM.fecha) as [Ultimo Mantenimiento]
     FROM vehiculos V
     LEFT JOIN vehiculos_mantenimientos VM ON V.id_vehiculo = VM.id_vehiculo
     GROUP BY V.id_vehiculo, V.placa, V.marca, V.modelo, V.anio, V.dekra_fecha;

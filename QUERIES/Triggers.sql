@@ -2,15 +2,14 @@ USE domus_hogar;
 GO
 
 /* Tablas auxiliares para auditoria y resumenes */
-IF OBJECT_ID('log_miembros', 'U') IS NULL
+IF OBJECT_ID('log_areas', 'U') IS NULL
 BEGIN
-    CREATE TABLE log_miembros (
+    CREATE TABLE log_areas (
         id_log INT IDENTITY(1,1) PRIMARY KEY,
         accion VARCHAR(10) NOT NULL,
-        id_miembro INT NULL,
+        id_area INT NULL,
         nombre VARCHAR(80) NULL,
-        apellido VARCHAR(80) NULL,
-        rol VARCHAR(50) NULL,
+        detalle VARCHAR(200) NULL,
         fecha_registro DATETIME2 NOT NULL DEFAULT SYSDATETIME()
     );
 END
@@ -38,21 +37,21 @@ BEGIN
 END
 GO
 
-/* 1. Auditoria de miembros */
-/* Cada vez que se inserta un miembro, guarda en log_miembros un registro con */
-CREATE OR ALTER TRIGGER trg_miembros_audit
-ON miembros
+/* 1. Auditoria de areas */
+/* Cada vez que se inserta o elimina un area se guarda un registro en log_areas */
+CREATE OR ALTER TRIGGER trg_areas_audit
+ON areas
 AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    INSERT INTO log_miembros (accion, id_miembro, nombre, apellido, rol)
-    SELECT 'INSERT', i.id_miembro, i.nombre, i.apellido, i.rol
+    INSERT INTO log_areas (accion, id_area, nombre, detalle)
+    SELECT 'INSERT', i.id_area, i.nombre, i.detalle
     FROM inserted i;
 
-    INSERT INTO log_miembros (accion, id_miembro, nombre, apellido, rol)
-    SELECT 'DELETE', d.id_miembro, d.nombre, d.apellido, d.rol
+    INSERT INTO log_areas (accion, id_area, nombre, detalle)
+    SELECT 'DELETE', d.id_area, d.nombre, d.detalle
     FROM deleted d;
 END
 GO
@@ -174,30 +173,38 @@ BEGIN
 END
 GO
 
-/* 7. Evitar asignaciones duplicadas de tareas */
-/* Impide que una misma tarea sea asignada más de una vez al mismo miembro. */
-CREATE OR ALTER TRIGGER trg_tareas_asignaciones_unicas
-ON tareas_asignaciones
-INSTEAD OF INSERT
+/* 7. Evitar tareas duplicadas */
+/* Impide crear/actualizar tareas con el mismo titulo en la misma lista. */
+CREATE OR ALTER TRIGGER trg_tareas_unicas
+ON tareas
+AFTER INSERT, UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
+
     IF EXISTS (
         SELECT 1
         FROM inserted i
-        JOIN tareas_asignaciones ta
-          ON ta.id_tarea = i.id_tarea AND ta.id_miembro = i.id_miembro
+        JOIN tareas t
+          ON t.id_lista = i.id_lista
+         AND t.titulo = i.titulo
+         AND t.id_tarea <> i.id_tarea
+    )
+    OR EXISTS (
+        SELECT 1
+        FROM inserted a
+        JOIN inserted b
+          ON a.id_lista = b.id_lista
+         AND a.titulo = b.titulo
+         AND a.id_tarea <> b.id_tarea
     )
     BEGIN
-        RAISERROR('La tarea ya está asignada a ese miembro.',16,1);
+        RAISERROR('Ya existe una tarea con ese titulo en la lista.',16,1);
+        ROLLBACK TRANSACTION;
         RETURN;
     END
-
-    INSERT INTO tareas_asignaciones (id_tarea, id_miembro)
-    SELECT id_tarea, id_miembro FROM inserted;
 END
 GO
-
 /* 8. Resumen de mantenimientos por vehculo */
 /* Mantiene actualizado el total de mantenimientos y la fecha del último mantenimiento por vehículo. */
 CREATE OR ALTER TRIGGER trg_mant_vehiculo_resumen
@@ -275,3 +282,5 @@ BEGIN
     END
 END
 GO
+
+

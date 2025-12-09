@@ -39,6 +39,7 @@ END
 GO
 
 /* 1. Auditoria de miembros */
+/* Cada vez que se inserta un miembro, guarda en log_miembros un registro con */
 CREATE OR ALTER TRIGGER trg_miembros_audit
 ON miembros
 AFTER INSERT, UPDATE, DELETE
@@ -57,6 +58,7 @@ END
 GO
 
 /* 2. Validar fechas futuras en eventos */
+/* Evita que se registren o actualicen eventos importantes con fechas en el pasado. */
 CREATE OR ALTER TRIGGER trg_eventos_fecha_futura
 ON eventos
 AFTER INSERT, UPDATE
@@ -78,6 +80,7 @@ END
 GO
 
 /* 3. Ajustar estado de facturas vencidas */
+/* Marca automáticamente como VENCIDA cualquier factura cuya fecha de vencimiento ya haya pasado y no esté pagada. */
 CREATE OR ALTER TRIGGER trg_facturas_estado
 ON facturas
 AFTER INSERT, UPDATE
@@ -94,6 +97,7 @@ END
 GO
 
 /* 4. Evitar presupuestos duplicados por (anio, mes, id_categoria) */
+/* Impide que se creen presupuestos duplicados para la misma categoría, mes y año. */
 CREATE OR ALTER TRIGGER trg_presupuestos_unicos
 ON presupuestos
 AFTER INSERT
@@ -117,6 +121,7 @@ END
 GO
 
 /* 5. Mantener resumen por categoria/tipo en movimientos */
+/* Actualiza automáticamente el resumen de totales y cantidades de movimientos por categoría y tipo. */
 CREATE OR ALTER TRIGGER trg_movimientos_resumen
 ON movimientos
 AFTER INSERT, UPDATE, DELETE
@@ -148,6 +153,7 @@ END
 GO
 
 /* 6. Validar fechas en tareas */
+/* Evita que una tarea tenga una fecha límite anterior a su fecha de creación. */
 CREATE OR ALTER TRIGGER trg_tareas_fechas
 ON tareas
 AFTER INSERT, UPDATE
@@ -169,6 +175,7 @@ END
 GO
 
 /* 7. Evitar asignaciones duplicadas de tareas */
+/* Impide que una misma tarea sea asignada más de una vez al mismo miembro. */
 CREATE OR ALTER TRIGGER trg_tareas_asignaciones_unicas
 ON tareas_asignaciones
 INSTEAD OF INSERT
@@ -192,6 +199,7 @@ END
 GO
 
 /* 8. Resumen de mantenimientos por vehculo */
+/* Mantiene actualizado el total de mantenimientos y la fecha del último mantenimiento por vehículo. */
 CREATE OR ALTER TRIGGER trg_mant_vehiculo_resumen
 ON vehiculos_mantenimientos
 AFTER INSERT, UPDATE, DELETE
@@ -226,6 +234,7 @@ END
 GO
 
 /* 9. Validar fechas en medicamentos de mascotas */
+/* Evita que los medicamentos de mascotas tengan fecha de finalización anterior a la de inicio. */
 CREATE OR ALTER TRIGGER trg_mascotas_meds_fechas
 ON mascotas_meds
 AFTER INSERT, UPDATE
@@ -247,6 +256,7 @@ END
 GO
 
 /* 10. Validar fechas en siembra */
+/* Impide registrar una fecha estimada de cosecha anterior a la fecha de siembra. */
 CREATE OR ALTER TRIGGER trg_siembras_fechas
 ON siembras
 AFTER INSERT, UPDATE
